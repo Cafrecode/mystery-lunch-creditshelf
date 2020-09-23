@@ -5,7 +5,9 @@ RSpec.describe "employees/edit", type: :view do
     @employee = assign(:employee, Employee.create!(
       name: "MyString",
       department: 1,
-      status: 1
+      status: 1,
+      email: 'me@you.com',
+      password: 'qwerqwe'
     ))
   end
 

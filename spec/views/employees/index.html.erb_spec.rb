@@ -6,12 +6,16 @@ RSpec.describe "employees/index", type: :view do
       Employee.create!(
         name: "Name",
         department: 2,
-        status: 3
+        status: 3,
+        email: 'me@you.com',
+        password: 'qwerqwe'
       ),
       Employee.create!(
         name: "Name",
         department: 2,
-        status: 3
+        status: 3,
+        email: 'mex@you.com',
+        password: 'qwerqwe'
       )
     ])
   end
