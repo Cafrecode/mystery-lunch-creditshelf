@@ -16,7 +16,7 @@ RSpec.describe "/employees", type: :request do
   # Employee. As you add validations to Employee, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { name: "Fredrick N", email: "me@you.com", password: "woo12333w" }
+    { name: "Fredrick N", email: "me@you.com", password: "1234567", password_confirmation: "1234567" }
   }
 
   let(:invalid_attributes) {
@@ -64,7 +64,7 @@ RSpec.describe "/employees", type: :request do
 
       it "redirects to the created employee" do
         post employees_url, params: { employee: valid_attributes }
-        expect(response).to redirect_to(employee_url(Employee.last))
+        expect(response).to redirect_to(employees_url)
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe "/employees", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         employee = Employee.create! valid_attributes
         patch employee_url(employee), params: { employee: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to_not be_successful
       end
     end
   end
