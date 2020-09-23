@@ -3,4 +3,5 @@
 3. Aws for pics - active storage - use apt name
 4. Devise for employees
 
-rails g migration Employee name:string email:string department:integer 
+# not including email as devise will include
+rails g scaffold Employee name:string department:integer status:integer
