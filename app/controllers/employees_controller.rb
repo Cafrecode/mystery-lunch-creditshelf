@@ -26,8 +26,17 @@ class EmployeesController < ApplicationController
   def create
     @employee = Employee.new(employee_params)
 
+    ### Generate aa random 6 char password for the user which is delivered via email
+    password = Devise.friendly_token.first(6)
+
+    @employee.password = password
+    @employee.password_confirmation = password
+
     respond_to do |format|
       if @employee.save
+
+        # TODO: Send email with login details to the registereduser
+
         format.html { redirect_to employees_url, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
@@ -69,6 +78,6 @@ class EmployeesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def employee_params
-      params.require(:employee).permit(:name, :department, :status, :avatar)
+      params.require(:employee).permit(:name, :department, :status, :email, :avatar)
     end
 end

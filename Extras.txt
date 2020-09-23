@@ -4,5 +4,13 @@
 4. Devise for employees
 5. Only generate random passwords for HR? when created?
 
+home visible without login option? only hide menu if not logged in, when loggedin iclude employees and home
+
 # not including email as devise will include
 rails g scaffold Employee name:string department:integer status:integer
+
+run through entire app to document choices etc, including menu visibility etc
+
+to delete, you have to explicitly change the status from the edit section of the employee
+
+describe the need for auto generated passwords
