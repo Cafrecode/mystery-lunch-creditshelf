@@ -1,0 +1,6 @@
+1. Notify employees of their matched lunches via email 
+2. Only HR can add or remove employees
+3. Aws for pics - active storage - use apt name
+4. Devise for employees
+
+rails g migration Employee name:string email:string department:integer 
