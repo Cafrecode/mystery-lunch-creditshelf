@@ -2,6 +2,7 @@
 2. Only HR can add or remove employees
 3. Aws for pics - active storage - use apt name
 4. Devise for employees
+5. Only generate random passwords for HR? when created?
 
 # not including email as devise will include
 rails g scaffold Employee name:string department:integer status:integer
