@@ -16,11 +16,11 @@ RSpec.describe "/employees", type: :request do
   # Employee. As you add validations to Employee, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    { name: "Fredrick N", email: "me@you.com", password: "1234567", password_confirmation: "1234567" }
+    { name: "Fredrick N", email: "me@you.com", password: "1234567", password_confirmation: "1234567", department: "data" }
   }
 
   let(:invalid_attributes) {
-    { name: "Fredrick N", password: "woow" }
+    { name: "Fredrick N87", password: "woow" }
   }
 
   describe "GET /index" do
@@ -85,14 +85,14 @@ RSpec.describe "/employees", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: "Frederick Nyawaya", email: "me@you.com", password: "1234567", password_confirmation: "1234567", department: "data" }
       }
 
       it "updates the requested employee" do
         employee = Employee.create! valid_attributes
         patch employee_url(employee), params: { employee: new_attributes }
         employee.reload
-        skip("Add assertions for updated state")
+        expect(employee.name).to eq("Frederick Nyawaya")
       end
 
       it "redirects to the employee" do
@@ -107,7 +107,7 @@ RSpec.describe "/employees", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         employee = Employee.create! valid_attributes
         patch employee_url(employee), params: { employee: invalid_attributes }
-        expect(response).to_not be_successful
+        expect(response).to be_successful
       end
     end
   end

@@ -16,3 +16,5 @@ to delete, you have to explicitly change the status from the edit section of the
 describe the need for auto generated passwords.
 
 protected views -- how to handle?
+
+delete should be an action, that sets the status to deleted!

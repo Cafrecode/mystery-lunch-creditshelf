@@ -22,5 +22,20 @@
 require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  subject {
+    described_class.new( name: "Frederick", email: "frederick@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )
+  }
+
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(subject).to be_valid
+    end
+
+    it "is not valid without a valid name" do
+      subject.name = "123Fred"
+      expect(subject).to_not be_valid
+    end
+  end
+
 end

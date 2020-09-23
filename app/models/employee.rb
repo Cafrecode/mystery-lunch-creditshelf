@@ -33,6 +33,9 @@ class Employee < ApplicationRecord
 
   ##################### Validations #######################
 
+  validates_presence_of :name, :department
+  validates_format_of :name, with: /^[a-zA-Z\s]*$/i, multiline: true
+
   ##################### Associations ######################
 
   has_one_attached :avatar
