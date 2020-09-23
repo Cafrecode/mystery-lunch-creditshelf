@@ -9,28 +9,21 @@
                                 class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
                                     class="ficon feather icon-menu"></i></a>
                         </li>
-                        <li class="nav-item">
-                            <div class="mx-auto" style="width: 249px;">
-                                    <img src="../../../app-assets/images/logo/hsa-logo.png" width="249" height="75"
-                                        alt="logo">
-                            </div>
-                        </li>
+         
                     </ul>
                 </div>
                 <ul class="nav navbar-nav float-right">
 
-                    <!--<li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
-                                class="ficon feather icon-maximize"></i></a></li>-->
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link"
                              data-toggle="dropdown"> 
                             <div class="user-nav d-sm-flex d-none"><span
-                                    class="user-name text-bold-600"><%= current_member.name %></span><span
-                                    class="user-status"><%= current_user.organization.name %></span>
+                                    class="user-name text-bold-600"><%= current_employee.name %></span><span
+                                    class="user-status"><%= current_employee.email %></span>
                             </div>
                             <span>
-                            <% if current_member.avatar.attached? %>
+                            <% if current_employee.avatar.attached? %>
                                 <% begin %>
-                                    <%= image_tag current_member.avatar.variant(resize: "60x60!"), class: "round" %>
+                                    <%= image_tag current_employee.avatar.variant(resize: "60x60!"), class: "round" %>
                                 <% rescue ActiveStorage::InvariableError => e %>
                                     <% puts "Rescued: #{e.inspect}" %>
                                 <img class="round" src="/app-assets/images/ico/avatar.jpeg" alt="avatar" height="60"
@@ -42,7 +35,7 @@
                             <% end %>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item') %>
+                                <%= link_to('Logout', destroy_employee_session_path, method: :delete, class: 'dropdown-item') %>
                             </div>
                             </a>
                     </li>
