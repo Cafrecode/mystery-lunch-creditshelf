@@ -16,11 +16,11 @@ RSpec.describe "/employees", type: :request do
   # Employee. As you add validations to Employee, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: "Fredrick N", email: "me@you.com", password: "woo12333w" }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: "Fredrick N", password: "woow" }
   }
 
   describe "GET /index" do
