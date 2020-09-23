@@ -13,4 +13,6 @@ run through entire app to document choices etc, including menu visibility etc
 
 to delete, you have to explicitly change the status from the edit section of the employee
 
-describe the need for auto generated passwords
+describe the need for auto generated passwords.
+
+protected views -- how to handle?
