@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "employees/edit", type: :view do
   before(:each) do
     @employee = assign(:employee, Employee.create!(
-      name: "MyString",
+      name: "MyString WD",
       department: 1,
       status: 1,
       email: 'me@you.com',

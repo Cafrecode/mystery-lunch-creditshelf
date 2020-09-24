@@ -25,7 +25,7 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum status:    [:active, :deleted]
+  enum status: [:active, :deleted]
 
   # Use an enum for the various departments (might not be ideal, but should work for this)
 
@@ -35,9 +35,32 @@ class Employee < ApplicationRecord
 
   validates_presence_of :name, :department
   validates_format_of :name, with: /^[a-zA-Z\s]*$/i, multiline: true
-
+  validate :has_full_name
   ##################### Associations ######################
 
   has_one_attached :avatar
 
+  def get_mystery_match
+    # first check match table for content, return that, else proceed
+    # get unmatched employees from diff department
+    viable_matches = Employee.where.not(department: self.department, status: :deleted)
+    # implies a 'is matched' check on employee
+    # for period starting 1st of month
+    # will need a model to hold the matching information
+    # persist match status (return persisted match if available)
+    viable_matches.select {|employee| employee.is_available }.sample
+  end
+
+  def is_available
+    # check matching relation for period starting 1st month - not matched for period
+    true
+  end
+
+  private
+
+  def has_full_name
+    if (name.gsub(/\s+/m, " ").strip.split(" ").length < 2)
+      errors.add(:name, "is not a valid name, use space separated full name")
+    end
+  end
 end

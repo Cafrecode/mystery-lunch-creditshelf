@@ -18,3 +18,25 @@ describe the need for auto generated passwords.
 protected views -- how to handle?
 
 delete should be an action, that sets the status to deleted!
+
+
+#################################
+
+Algo Requirements:
+
+1. Matched with someone from a different department
+
+    - get list of employees
+    - traverse while finding a diff department
+    - pop both from the list and keep going
+
+    (what happens when left with two from same dept? crash and burn?)
+    - or have a fun on employee class called get match? nope, maybe?
+2. Cannot be the same one if has been matched in last 3 months
+
+
+* can get current match, can get previous matches - from employee model
+* only hr can add users btw* can see the admin section for users* don't need to enforce on display?
+* if no matches can be available for whatever reason: no employees, 
+all in one department etc (if no criteria is met): display no lunches this month,
+ we cant create matches matching the criteria
