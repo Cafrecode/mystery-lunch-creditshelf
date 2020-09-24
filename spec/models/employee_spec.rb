@@ -24,7 +24,7 @@ require 'rails_helper'
 RSpec.describe Employee, type: :model do
 
   subject {
-    described_class.new( name: "Frederick", email: "frederick@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )
+    described_class.new( name: "Frederick Om", email: "frederick@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )
   }
 
   describe "Validations" do
@@ -32,10 +32,23 @@ RSpec.describe Employee, type: :model do
       expect(subject).to be_valid
     end
 
-    it "is not valid without a valid name" do
+    it "is not valid without a valid name (name with numbers)" do
       subject.name = "123Fred"
       expect(subject).to_not be_valid
     end
+
+    it "is not valid without a valid name (single name)" do
+      subject.name = "Fred"
+      expect(subject).to_not be_valid
+    end
   end
+
+  describe "Match" do
+    let (:lizzy) { Employee.create(name: "Lizzy", email: "lizzy@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )}
+    let (:frank) { Employee.create(name: "Frank", email: "frank@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )}
+    let (:mary) { Employee.create(name: "Mary", email: "mary@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )}
+
+  end
+
 
 end
