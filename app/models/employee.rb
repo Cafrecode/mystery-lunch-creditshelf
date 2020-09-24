@@ -36,9 +36,11 @@ class Employee < ApplicationRecord
   validates_presence_of :name, :department
   validates_format_of :name, with: /^[a-zA-Z\s]*$/i, multiline: true
   validate :has_full_name
+
   ##################### Associations ######################
 
   has_one_attached :avatar
+  has_many  :lunches, through: :employee_lunches
 
   def get_mystery_match
     # first check match table for content, return that, else proceed
