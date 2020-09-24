@@ -14,5 +14,6 @@ class Lunch < ApplicationRecord
 
     ################## Associations #######################
 
+    has_many    :employee_lunches
     has_many    :employees, through: :employee_lunches
 end

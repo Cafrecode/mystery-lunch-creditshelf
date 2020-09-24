@@ -40,6 +40,8 @@ class Employee < ApplicationRecord
   ##################### Associations ######################
 
   has_one_attached :avatar
+  
+  has_many  :employee_lunches
   has_many  :lunches, through: :employee_lunches
 
   def get_mystery_match

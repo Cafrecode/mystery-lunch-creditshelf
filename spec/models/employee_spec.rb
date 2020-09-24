@@ -43,6 +43,10 @@ RSpec.describe Employee, type: :model do
     end
   end
 
+  describe "Associations" do
+    it { should have_many(:lunches) }
+  end
+
   describe "Match" do
     let (:lizzy) { Employee.create!(name: "Lizzy D", email: "lizzy@gmail.com", password: "123456", password_confirmation: "123456", department: "marketing" )}
     let (:frank) { Employee.create!(name: "Frank DF", email: "frank@gmail.com", password: "123456", password_confirmation: "123456", department: "operations" )}

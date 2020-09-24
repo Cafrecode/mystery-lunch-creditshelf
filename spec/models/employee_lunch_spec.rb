@@ -9,8 +9,17 @@
 #  employee_id :bigint
 #  lunch_id    :bigint
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe EmployeeLunch, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  subject {
+    described_class.new(employee: Employee.new, lunch: Lunch.new)
+  }
+
+  describe "Validations" do
+    it "should be valid with valid attributes" do
+      expect(subject).to be_valid
+    end
+  end
 end
