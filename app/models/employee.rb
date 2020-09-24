@@ -59,7 +59,6 @@ class Employee < ApplicationRecord
   private
 
   def has_full_name
-    name.gsub(/\s+/m, " ").strip.split(" ")
     if (name.gsub(/\s+/m, " ").strip.split(" ").length < 2)
       errors.add(:name, "is not a valid name, use space separated full name")
     end

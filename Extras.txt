@@ -36,3 +36,7 @@ Algo Requirements:
 
 
 * can get current match, can get previous matches - from employee model
+* only hr can add users btw* can see the admin section for users* don't need to enforce on display?
+* if no matches can be available for whatever reason: no employees, 
+all in one department etc (if no criteria is met): display no lunches this month,
+ we cant create matches matching the criteria

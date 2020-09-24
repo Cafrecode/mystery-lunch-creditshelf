@@ -44,10 +44,15 @@ RSpec.describe Employee, type: :model do
   end
 
   describe "Match" do
-    let (:lizzy) { Employee.create(name: "Lizzy", email: "lizzy@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )}
-    let (:frank) { Employee.create(name: "Frank", email: "frank@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )}
-    let (:mary) { Employee.create(name: "Mary", email: "mary@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )}
+    let (:lizzy) { Employee.create(name: "Lizzy", email: "lizzy@gmail.com", password: "123456", password_confirmation: "123456", department: "marketing" )}
+    let (:frank) { Employee.create(name: "Frank", email: "frank@gmail.com", password: "123456", password_confirmation: "123456", department: "operations" )}
+    let (:mary) { Employee.create(name: "Mary", email: "mary@gmail.com", password: "123456", password_confirmation: "123456", department: "sales" )}
 
+    it "has a match from a different department" do
+      match = subject.get_mystery_match
+      puts match
+      expect(match).to_not be_nil
+    end
   end
 
 
