@@ -13,11 +13,11 @@ class EmployeeLunch < ApplicationRecord
 
     ############### Validations #############################
 
-    validates_uniquness_of  :employee_id, scope: :lunch_id 
+    validates_uniqueness_of  :employee_id, scope: :lunch_id 
 
     ############## Associations ##############################
 
     belongs_to  :employee
     belongs_to  :lunch
-    
+
 end
