@@ -43,7 +43,7 @@ class Employee < ApplicationRecord
   def get_mystery_match
     # first check match table for content, return that, else proceed
     # get unmatched employees from diff department
-    viable_matches = Employee.where.not(department: self.department)
+    viable_matches = Employee.where.not(department: self.department, status: :deleted)
     # implies a 'is matched' check on employee
     # for period starting 1st of month
     # will need a model to hold the matching information
