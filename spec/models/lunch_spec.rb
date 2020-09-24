@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: lunches
@@ -11,7 +13,7 @@
 require 'rails_helper'
 
 RSpec.describe Lunch, type: :model do
-  describe "Associations" do
+  describe 'Associations' do
     it { should have_many(:employees) }
   end
 end

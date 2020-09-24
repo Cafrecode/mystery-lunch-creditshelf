@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: lunches
@@ -9,11 +11,10 @@
 #  updated_at :datetime         not null
 #
 class Lunch < ApplicationRecord
+  ################## Validations ########################
 
-    ################## Validations ########################
+  ################## Associations #######################
 
-    ################## Associations #######################
-
-    has_many    :employee_lunches
-    has_many    :employees, through: :employee_lunches
+  has_many    :employee_lunches
+  has_many    :employees, through: :employee_lunches
 end

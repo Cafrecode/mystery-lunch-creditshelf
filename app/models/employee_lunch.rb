@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: employee_lunches
@@ -10,14 +12,12 @@
 #  lunch_id    :bigint
 #
 class EmployeeLunch < ApplicationRecord
+  ############### Validations #############################
 
-    ############### Validations #############################
+  validates_uniqueness_of :employee_id, scope: :lunch_id
 
-    validates_uniqueness_of  :employee_id, scope: :lunch_id 
+  ############## Associations ##############################
 
-    ############## Associations ##############################
-
-    belongs_to  :employee
-    belongs_to  :lunch
-
+  belongs_to  :employee
+  belongs_to  :lunch
 end

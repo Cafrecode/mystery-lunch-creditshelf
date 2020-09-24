@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: employee_lunches
@@ -9,16 +11,15 @@
 #  employee_id :bigint
 #  lunch_id    :bigint
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe EmployeeLunch, type: :model do
-  
-  subject {
+  subject do
     described_class.new(employee: Employee.new, lunch: Lunch.new)
-  }
+  end
 
-  describe "Validations" do
-    it "should be valid with valid attributes" do
+  describe 'Validations' do
+    it 'should be valid with valid attributes' do
       expect(subject).to be_valid
     end
   end

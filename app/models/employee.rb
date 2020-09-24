@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: employees
@@ -25,11 +27,11 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum status: [:active, :deleted]
+  enum status: %i[active deleted]
 
   # Use an enum for the various departments (might not be ideal, but should work for this)
 
-  enum department: [:operations, :sales, :marketing, :risk, :management, :finance, :hr, :development, :data]
+  enum department: %i[operations sales marketing risk management finance hr development data]
 
   ##################### Validations #######################
 
@@ -40,19 +42,19 @@ class Employee < ApplicationRecord
   ##################### Associations ######################
 
   has_one_attached :avatar
-  
+
   has_many  :employee_lunches
   has_many  :lunches, through: :employee_lunches
 
   def get_mystery_match
     # first check match table for content, return that, else proceed
     # get unmatched employees from diff department
-    viable_matches = Employee.where.not(department: self.department, status: :deleted)
+    viable_matches = Employee.where.not(department: department, status: :deleted)
     # implies a 'is matched' check on employee
     # for period starting 1st of month
     # will need a model to hold the matching information
     # persist match status (return persisted match if available)
-    viable_matches.select {|employee| employee.is_available }.sample
+    viable_matches.select(&:is_available).sample
   end
 
   def is_available
@@ -63,8 +65,8 @@ class Employee < ApplicationRecord
   private
 
   def has_full_name
-    if (name.gsub(/\s+/m, " ").strip.split(" ").length < 2)
-      errors.add(:name, "is not a valid name, use space separated full name")
+    if name.gsub(/\s+/m, ' ').strip.split(' ').length < 2
+      errors.add(:name, 'is not a valid name, use space separated full name')
     end
   end
 end
