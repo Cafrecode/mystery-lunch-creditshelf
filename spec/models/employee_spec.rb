@@ -44,14 +44,18 @@ RSpec.describe Employee, type: :model do
   end
 
   describe "Match" do
-    let (:lizzy) { Employee.create(name: "Lizzy", email: "lizzy@gmail.com", password: "123456", password_confirmation: "123456", department: "marketing" )}
-    let (:frank) { Employee.create(name: "Frank", email: "frank@gmail.com", password: "123456", password_confirmation: "123456", department: "operations" )}
-    let (:mary) { Employee.create(name: "Mary", email: "mary@gmail.com", password: "123456", password_confirmation: "123456", department: "sales" )}
+    let (:lizzy) { Employee.create!(name: "Lizzy D", email: "lizzy@gmail.com", password: "123456", password_confirmation: "123456", department: "marketing" )}
+    let (:frank) { Employee.create!(name: "Frank DF", email: "frank@gmail.com", password: "123456", password_confirmation: "123456", department: "operations" )}
+    let (:mary) { Employee.create!(name: "Mary FG", email: "mary@gmail.com", password: "123456", password_confirmation: "123456", department: "sales" )}
 
     it "has a match from a different department" do
-      match = subject.get_mystery_match
-      puts match
-      expect(match).to_not be_nil
+      # hmm, strange that i have to call save explicitly
+      lizzy.save!
+      frank.save!
+      mary.save!
+      expect(subject.get_mystery_match).to_not be_nil
+      expect(subject.get_mystery_match.department).to_not eq(subject.department)
+
     end
   end
 
