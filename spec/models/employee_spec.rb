@@ -47,6 +47,7 @@ RSpec.describe Employee, type: :model do
     let (:lizzy) { Employee.create!(name: "Lizzy D", email: "lizzy@gmail.com", password: "123456", password_confirmation: "123456", department: "marketing" )}
     let (:frank) { Employee.create!(name: "Frank DF", email: "frank@gmail.com", password: "123456", password_confirmation: "123456", department: "operations" )}
     let (:mary) { Employee.create!(name: "Mary FG", email: "mary@gmail.com", password: "123456", password_confirmation: "123456", department: "sales" )}
+    let (:maureen) { Employee.create!(name: "Maureen FG", email: "maryw@gmail.com", password: "123456", password_confirmation: "123456", department: "data" )}
 
     it "has a match from a different department" do
       # hmm, strange that i have to call save explicitly
@@ -56,6 +57,11 @@ RSpec.describe Employee, type: :model do
       expect(subject.get_mystery_match).to_not be_nil
       expect(subject.get_mystery_match.department).to_not eq(subject.department)
 
+    end
+
+    it "does not have a match from any other department" do
+      maureen.save!
+      expect(subject.get_mystery_match).to be_nil
     end
   end
 
