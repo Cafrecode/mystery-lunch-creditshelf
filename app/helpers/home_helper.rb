@@ -3,7 +3,7 @@
 module HomeHelper
 
     def current_partners
-        EmployeeLunch.all.group_by()
+        EmployeeLunch.all.group_by(&:lunch)
     end
 
 end
