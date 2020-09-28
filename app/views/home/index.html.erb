@@ -3,7 +3,14 @@
     <h2>September</h2>
 
     <% current_partner_groups.each do |matches| %>
-    <%= render partial: 'pair', employees: matches %>
+    <% flat = matches.flatten() %>
+    <% flat.shift %>
+
+    <% puts "matches inse: " + flat.inspect %>
+
+        <% puts "matches inse: " + flat.count.to_s %>
+
+        <%= render 'pair', lunch_partners: flat %>
     <% end %>
 
 </section>
