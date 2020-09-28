@@ -26,8 +26,6 @@ class EmployeeLunch < ApplicationRecord
 
   # Enforce no two employees can be saved if from the same department (the logic to find matches can be circumveneted and result in matching same dept)
   def different_department
-    puts "mipan: " + self.employee.inspect
-    puts "employees: " + self.lunch.employees.where(department: self.employee.department).inspect
     if self.lunch.employees.where(department: self.employee.department).count > 1
       errors.add(:employee, "is not valid, they need to be from different depeartments")
     end
