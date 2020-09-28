@@ -47,6 +47,7 @@ class Employee < ApplicationRecord
   has_many  :lunches, through: :employee_lunches
 
   def get_mystery_match
+    # make sure self 'is available first -- test case, if not available, no need to proceed?' hmm, this might end up matching same person?
     # first check match table for content, return that, else proceed
     # get unmatched employees from diff department
     viable_matches = Employee.where.not(department: department, status: :deleted)
@@ -58,13 +59,19 @@ class Employee < ApplicationRecord
   end
 
   def is_available
-    # Check most recent lunch is before 1st of this month
-    # check most recent lunch has no more than one employee lunches
-    # puts "#{"isnpe: " + self.lunches.first.employees.count.to_s}"
-    self.lunches.empty? || (self.lunches.first.present? &&  self.lunches.first.employees.count <= 1)
+    # Get any lunches created after last day of last month
+    ## Lunches this months:
+    puts "cuurrrr: " + current_lunches.first.inspect
+    # if empty,employee is available
+    # if not empty, check that they have been matched with just one (self -- unless the third persion)
+    self.current_lunches.empty? || (self.current_lunches.first.present? &&  self.current_lunches.first.employees.count <= 1)
   end
 
   private
+
+  def current_lunches # lunches this month?
+    self.lunches.filter {|lunch| lunch.date > 5.days.ago } # get last day of last months (or first day of this months, use >=)
+  end
 
   def has_full_name
     if name.gsub(/\s+/m, ' ').strip.split(' ').length < 2

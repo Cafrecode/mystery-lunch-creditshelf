@@ -80,17 +80,17 @@ RSpec.describe Employee, type: :model do
   describe "Availability" do
 
     it "is not available if already has a match with another employee" do
-      lunch = Lunch.create!(date: Time.now)
+      lunch = Lunch.create!(date: 1.day.ago)
       lunch.save!
 
 
-      el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch)
+      el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch, date: 1.day.ago)
       el2.save!
 
       puts el2.inspect
 
 
-      el1 = EmployeeLunch.create!(employee: subject, lunch: lunch)
+      el1 = EmployeeLunch.create!(employee: subject, lunch: lunch, date: 1.day.ago)
       el1.save!
 
       puts el1.inspect
