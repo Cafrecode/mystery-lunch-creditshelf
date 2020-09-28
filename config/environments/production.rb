@@ -63,7 +63,12 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "mystery_lunch_creditshelf_production"
 
   config.action_mailer.perform_caching = false
-
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :mailjet_api
+  config.action_mailer.asset_host = 'https://mystery.cafrecode.co.ke'
+  
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

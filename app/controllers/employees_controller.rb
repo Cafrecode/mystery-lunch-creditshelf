@@ -37,6 +37,8 @@ class EmployeesController < ApplicationController
 
         # TODO: Send email with login details to the registereduser
 
+        EmployeeMailer.send_welcome_email(@employee)
+        
         format.html { redirect_to employees_url, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
