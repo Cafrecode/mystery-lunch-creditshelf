@@ -2,12 +2,12 @@
 
     <h2>Current Mystery Lunch Partners</h2>
 
-    <% current_partner_groups.each do |matches| %>
+    <% current_partner_groups.each_with_index do |matches, index| %>
 
     <!-- The query returns the first result as the lunch, the rest as the employee lunches -->
     <% flat = matches.flatten() %>
     <% flat.shift %>
-    <%= render 'pair', employee_lunches: flat %>
+    <%= render 'pair', employee_lunches: flat, index: index %>
 
     <% end %>
 
