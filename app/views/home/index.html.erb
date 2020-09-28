@@ -1,7 +1,9 @@
 <section class="page-users-view">
 
     <h2>September</h2>
-    
-    <%= render partial: 'pair' %>
+
+    <% current_partner_groups.each do |matches| %>
+    <%= render partial: 'pair', employees: matches %>
+    <% end %>
 
 </section>

@@ -6,3 +6,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+employees = Employee.create([
+    {name: 'Lizzy D', email: 'lizzy@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing'},
+    {name: 'Mary FG', email: 'mary@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales'},
+    {name: 'Frank DF', email: 'frank@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations'},
+    {name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'data'},
+    {name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted'},
+    {name: 'Frederick Om', email: 'frederick@gmail.com', password: '123456', password_confirmation: '123456', department: 'data'}
+])
+
+lunch = Lunch.create!(date: 1.day.ago)
+
+el2 = EmployeeLunch.create!(employee: Employee.first, lunch: lunch, date: 1.day.ago)
+
+el1 = EmployeeLunch.create!(employee: Employee.second, lunch: lunch, date: 1.day.ago)
