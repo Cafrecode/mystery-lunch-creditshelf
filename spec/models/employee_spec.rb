@@ -24,6 +24,13 @@
 require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
+
+  let(:lizzy) { Employee.create!(name: 'Lizzy D', email: 'lizzy@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing') }
+  let(:frank) { Employee.create!(name: 'Frank DF', email: 'frank@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations') }
+  let(:mary) { Employee.create!(name: 'Mary FG', email: 'mary@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales') }
+  let(:maureen) { Employee.create!(name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'data') }
+  let(:eva) { Employee.create!(name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted') }
+
   subject do
     described_class.new(name: 'Frederick Om', email: 'frederick@gmail.com', password: '123456', password_confirmation: '123456', department: 'data')
   end
@@ -49,11 +56,6 @@ RSpec.describe Employee, type: :model do
   end
 
   describe 'Match' do
-    let(:lizzy) { Employee.create!(name: 'Lizzy D', email: 'lizzy@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing') }
-    let(:frank) { Employee.create!(name: 'Frank DF', email: 'frank@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations') }
-    let(:mary) { Employee.create!(name: 'Mary FG', email: 'mary@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales') }
-    let(:maureen) { Employee.create!(name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'data') }
-    let(:eva) { Employee.create!(name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted') }
 
     it 'has a match from a different department' do
       # hmm, strange that i have to call save explicitly
@@ -72,6 +74,32 @@ RSpec.describe Employee, type: :model do
     it 'cannot match a deleted user' do
       eva.save!
       expect(subject.get_mystery_match).to be_nil
+    end
+  end
+
+  describe "Availability" do
+
+    it "is not available if already has a match with another employee" do
+      lunch = Lunch.create!(date: Time.now)
+      lunch.save!
+
+
+      el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch)
+      el2.save!
+
+      puts el2.inspect
+
+
+      el1 = EmployeeLunch.create!(employee: subject, lunch: lunch)
+      el1.save!
+
+      puts el1.inspect
+
+      puts subject.lunches.first.employees.count
+
+      subject.save!
+
+      expect(subject.is_available).to eq false
     end
   end
 end

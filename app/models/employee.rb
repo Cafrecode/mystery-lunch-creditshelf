@@ -58,8 +58,10 @@ class Employee < ApplicationRecord
   end
 
   def is_available
-    # check matching relation for period starting 1st month - not matched for period
-    true
+    # Check most recent lunch is before 1st of this month
+    # check most recent lunch has no more than one employee lunches
+    # puts "#{"isnpe: " + self.lunches.first.employees.count.to_s}"
+    self.lunches.empty? || (self.lunches.first.present? &&  self.lunches.first.employees.count <= 1)
   end
 
   private
