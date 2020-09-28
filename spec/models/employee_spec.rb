@@ -24,7 +24,6 @@
 require 'rails_helper'
 
 RSpec.describe Employee, type: :model do
-
   let(:lizzy) { Employee.create!(name: 'Lizzy D', email: 'lizzy@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing') }
   let(:frank) { Employee.create!(name: 'Frank DF', email: 'frank@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations') }
   let(:mary) { Employee.create!(name: 'Mary FG', email: 'mary@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales') }
@@ -56,7 +55,6 @@ RSpec.describe Employee, type: :model do
   end
 
   describe 'Match' do
-
     it 'has a match from a different department' do
       # hmm, strange that i have to call save explicitly
       lizzy.save!
@@ -77,9 +75,8 @@ RSpec.describe Employee, type: :model do
     end
   end
 
-  describe "Availability" do
-
-    it "is not available if already has a match with another employee" do
+  describe 'Availability' do
+    it 'is not available if already has a match with another employee' do
       # create a lunch (the matching will be moved to the model)
       lunch = Lunch.create!(date: 1.day.ago)
       lunch.save!
@@ -94,7 +91,7 @@ RSpec.describe Employee, type: :model do
       expect(subject.is_available).to eq false
     end
 
-    it "is available if the last match(with employee x) was over 3 months ago" do # refine this spec
+    it 'is available if the last match(with employee x) was over 3 months ago' do # refine this spec
       lunch = Lunch.create!(date: 1.day.ago, created_at: 3.months.ago)
       lunch.save!
 
@@ -108,7 +105,7 @@ RSpec.describe Employee, type: :model do
       expect(subject.is_available).to eq true
     end
 
-    it "can match a viable employee" do 
+    it 'can match a viable employee' do
       lizzy.save!
 
       subject.match

@@ -63,26 +63,25 @@ class Employee < ApplicationRecord
     ## Lunches this months:
     # if empty,employee is available
     # if not empty, check that they have been matched with just one (self -- unless the third persion)
-    self.active_lunches.empty? || (self.active_lunches.first.present? &&  self.active_lunches.first.employees.count <= 1)
+    active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1)
     # filter only employees that are active here... toa ccount for 'deleted' employees
   end
 
-  def match 
+  def match
     # match employees?, assuming ideal conditions. work on edge cases later
     # create lunch, date is now -- created at, whatver
-    # create employee lunch 
+    # create employee lunch
     # add both self and viable match if not nil to lunch - via employee lunch
-    lunch = Lunch.create!()
+    lunch = Lunch.create!
 
     empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
-    empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: self.get_mystery_match)
-
+    empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: get_mystery_match)
   end
 
   private
 
   def active_lunches # lunches this month for this Employee,if any. Take care not to create a lot of them? Only consider first one
-    self.lunches.filter {|lunch| lunch.created_at >= 0.days.ago.beginning_of_month }
+    lunches.filter { |lunch| lunch.created_at >= 0.days.ago.beginning_of_month }
   end
 
   # Filter specific partner for past 3 months match
