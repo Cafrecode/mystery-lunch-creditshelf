@@ -40,3 +40,18 @@ Algo Requirements:
 * if no matches can be available for whatever reason: no employees, 
 all in one department etc (if no criteria is met): display no lunches this month,
  we cant create matches matching the criteria
+
+ respond to email to suggest location?time?
+
+ rails g model Lunch location:string date:datetime 
+
+ rails g model EmployeeLunch date:date employee_id:bigint lunch_id:bigint
+
+ TODO:
+
+ [ ] Email configuration including templates for newly registered users, plus sending out emails
+ [ ] Background cron job for match making service, triggered on x day of month. send emails for matches
+ [ ] Display matches on home page - with images etc
+ [ ] Cleanup
+ [ ] Docker configs/setup
+ [ ] production deployment
