@@ -32,7 +32,12 @@ RSpec.describe HomeHelper, type: :helper do
       el1 = EmployeeLunch.create!(employee: frank, lunch: lunch, date: 1.day.ago)
       el1.save!
 
-      expect(EmployeeLunch.current_partners.count).to eq 2
+      puts "partners: "  + EmployeeLunch.current_partner_groups.first[0].inspect
+
+      expect(EmployeeLunch.current_partner_groups.count).to eq 1
+      expect(EmployeeLunch.current_partner_groups.first[0].employees.count).to eq 2
+      expect(EmployeeLunch.current_partner_groups.first[0].employees.first.name).to eq "Lizzy D"
+
     end
   end
 end
