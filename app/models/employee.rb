@@ -64,6 +64,7 @@ class Employee < ApplicationRecord
     # if empty,employee is available
     # if not empty, check that they have been matched with just one (self -- unless the third persion)
     self.active_lunches.empty? || (self.active_lunches.first.present? &&  self.active_lunches.first.employees.count <= 1)
+    # filter only employees that are active here... toa ccount for 'deleted' employees
   end
 
   def match 
@@ -77,7 +78,7 @@ class Employee < ApplicationRecord
 
   def active_lunches # lunches this month?
     # find a gem to get you the first day of this month
-    self.lunches.filter {|lunch| lunch.date > 5.days.ago } # get last day of last months (or first day of this months, use >=)
+    self.lunches.filter {|lunch| lunch.date > beginning_of_month } # get last day of last months (or first day of this months, use >=)
   end
 
   def has_full_name
