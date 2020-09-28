@@ -4,5 +4,6 @@ class EmployeeMatchingJob < ApplicationJob
   def perform(*args)
     # Do something later
     # get all employees and create matches for x month
+    puts 'running the match making task now'
   end
 end
