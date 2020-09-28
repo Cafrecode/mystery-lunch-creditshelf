@@ -76,10 +76,11 @@ class Employee < ApplicationRecord
 
   private
 
-  def active_lunches # lunches this month?
-    # find a gem to get you the first day of this month
-    self.lunches.filter {|lunch| lunch.date > beginning_of_month } # get last day of last months (or first day of this months, use >=)
+  def active_lunches # lunches this month for this Employee,if any. Take care not to create a lot of them? Only consider first one
+    self.lunches.filter {|lunch| lunch.created_at >= 0.days.ago.beginning_of_month }
   end
+
+  # Filter specific partner for past 3 months match
 
   def has_full_name
     if name.gsub(/\s+/m, ' ').strip.split(' ').length < 2

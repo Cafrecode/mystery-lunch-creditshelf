@@ -80,26 +80,32 @@ RSpec.describe Employee, type: :model do
   describe "Availability" do
 
     it "is not available if already has a match with another employee" do
+      # create a lunch (the matching will be moved to the model)
       lunch = Lunch.create!(date: 1.day.ago)
       lunch.save!
 
-
+      # Pair up with one employee
       el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch, date: 1.day.ago)
       el2.save!
-
-      puts el2.inspect
-
 
       el1 = EmployeeLunch.create!(employee: subject, lunch: lunch, date: 1.day.ago)
       el1.save!
 
-      puts el1.inspect
-
-      puts subject.lunches.first.employees.count
-
-      subject.save!
-
       expect(subject.is_available).to eq false
+    end
+
+    it "is available if the last match(with employee x) was over 3 months ago" do # refine this spec
+      lunch = Lunch.create!(date: 1.day.ago, created_at: 3.months.ago)
+      lunch.save!
+
+      # Pair up with one employee
+      el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch, date: 1.day.ago)
+      el2.save!
+
+      el1 = EmployeeLunch.create!(employee: subject, lunch: lunch, date: 1.day.ago)
+      el1.save!
+
+      expect(subject.is_available).to eq true
     end
   end
 end
