@@ -35,10 +35,8 @@ class EmployeesController < ApplicationController
     respond_to do |format|
       if @employee.save
 
-        # TODO: Send email with login details to the registereduser
+        EmployeeMailer.send_welcome_email(@employee).deliver # Maybe do it async?
 
-        EmployeeMailer.send_welcome_email(@employee)
-        
         format.html { redirect_to employees_url, notice: 'Employee was successfully created.' }
         format.json { render :show, status: :created, location: @employee }
       else
