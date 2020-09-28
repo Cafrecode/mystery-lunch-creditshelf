@@ -107,5 +107,12 @@ RSpec.describe Employee, type: :model do
 
       expect(subject.is_available).to eq true
     end
+
+    it "can match a viable employee" do 
+      lizzy.save!
+
+      subject.match
+      expect(subject.is_available).to eq false
+    end
   end
 end
