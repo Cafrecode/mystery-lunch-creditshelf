@@ -47,14 +47,10 @@ class Employee < ApplicationRecord
   has_many  :lunches, through: :employee_lunches
 
   def get_mystery_match
-    # make sure self 'is available first -- test case, if not available, no need to proceed?' hmm, this might end up matching same person?
-    # first check match table for content, return that, else proceed
     # get unmatched employees from diff department
     viable_matches = Employee.where.not(department: department, status: :deleted)
-    # implies a 'is matched' check on employee
-    # for period starting 1st of month
-    # will need a model to hold the matching information
-    # persist match status (return persisted match if available)
+    # Filter them based on their availability: have they been matched? 
+    # Missing three month check to negate viability
     viable_matches.select(&:is_available).sample
   end
 
@@ -63,8 +59,8 @@ class Employee < ApplicationRecord
     ## Lunches this months:
     # if empty,employee is available
     # if not empty, check that they have been matched with just one (self -- unless the third persion)
+    ## Lunches in the last 3months with self?
     active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1)
-    # filter only employees that are active here... toa ccount for 'deleted' employees
   end
 
   def match
@@ -72,10 +68,11 @@ class Employee < ApplicationRecord
     # create lunch, date is now -- created at, whatver
     # create employee lunch
     # add both self and viable match if not nil to lunch - via employee lunch
-    lunch = Lunch.create!
-
-    empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
-    empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: get_mystery_match)
+    if self.is_available && get_mystery_match.present?
+      lunch = Lunch.create!
+      empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
+      empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: get_mystery_match)
+    end
   end
 
   private

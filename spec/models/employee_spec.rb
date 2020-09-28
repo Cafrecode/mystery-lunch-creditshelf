@@ -64,6 +64,16 @@ RSpec.describe Employee, type: :model do
       expect(subject.get_mystery_match.department).to_not eq(subject.department)
     end
 
+    it 'can match with another employee' do
+      lizzy.save!
+      expect(subject.match).to_not be_nil
+    end
+
+    it 'cannot match with an employee of the same department' do
+      maureen.save!
+      expect(subject.match).to be_nil
+    end
+
   end
 
   describe 'Availability' do
@@ -94,13 +104,6 @@ RSpec.describe Employee, type: :model do
       el1.save!
 
       expect(subject.is_available).to eq true
-    end
-
-    it 'can match a viable employee' do
-      lizzy.save!
-
-      subject.match
-      expect(subject.is_available).to eq false
     end
   end
 end
