@@ -64,15 +64,6 @@ RSpec.describe Employee, type: :model do
       expect(subject.get_mystery_match.department).to_not eq(subject.department)
     end
 
-    it 'does not have a match from any other department' do
-      maureen.save!
-      expect(subject.get_mystery_match).to be_nil
-    end
-
-    it 'cannot match a deleted user' do
-      eva.save!
-      expect(subject.get_mystery_match).to be_nil
-    end
   end
 
   describe 'Availability' do

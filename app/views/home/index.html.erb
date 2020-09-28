@@ -3,14 +3,12 @@
     <h2>September</h2>
 
     <% current_partner_groups.each do |matches| %>
+
+    <!-- The query returns the first result as the lunch, the rest as the employee lunches -->
     <% flat = matches.flatten() %>
     <% flat.shift %>
+    <%= render 'pair', employee_lunches: flat %>
 
-    <% puts "matches inse: " + flat.inspect %>
-
-        <% puts "matches inse: " + flat.count.to_s %>
-
-        <%= render 'pair', lunch_partners: flat %>
     <% end %>
 
 </section>
