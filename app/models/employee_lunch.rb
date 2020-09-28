@@ -22,7 +22,15 @@ class EmployeeLunch < ApplicationRecord
   belongs_to :employee
   belongs_to :lunch
 
+  ############# Callbacks ##################################
+  # Before saving, send email to relevant employees notifying of their being matches
+  after_save  :notify_matched_employees
+
   private
+
+  def notify_matched_employees
+    EmployeeMailer.send_request(lunch.employees)
+  end
 
   # Enforce no two employees can be saved if from the same department (the logic to find matches can be circumveneted and result in matching same dept)
   def different_department
