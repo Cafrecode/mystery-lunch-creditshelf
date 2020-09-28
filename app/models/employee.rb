@@ -72,10 +72,11 @@ class Employee < ApplicationRecord
     # create lunch, date is now -- created at, whatver
     # create employee lunch
     # add both self and viable match if not nil to lunch - via employee lunch
-    lunch = Lunch.create!
-
-    empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
-    empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: get_mystery_match)
+    if self.is_available && get_mystery_match.present?
+      lunch = Lunch.create!
+      empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
+      empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: get_mystery_match)
+    end
   end
 
   private
