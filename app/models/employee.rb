@@ -61,15 +61,22 @@ class Employee < ApplicationRecord
   def is_available
     # Get any lunches created after last day of last month
     ## Lunches this months:
-    puts "cuurrrr: " + current_lunches.first.inspect
     # if empty,employee is available
     # if not empty, check that they have been matched with just one (self -- unless the third persion)
-    self.current_lunches.empty? || (self.current_lunches.first.present? &&  self.current_lunches.first.employees.count <= 1)
+    self.active_lunches.empty? || (self.active_lunches.first.present? &&  self.active_lunches.first.employees.count <= 1)
+  end
+
+  def match 
+    # match employees?, assuming ideal conditions. work on edge cases later
+    # create lunch, date is now -- created at, whatver
+    # create employee lunch 
+    # add both self and viable match if not nil to lunch - via employee lunch
   end
 
   private
 
-  def current_lunches # lunches this month?
+  def active_lunches # lunches this month?
+    # find a gem to get you the first day of this month
     self.lunches.filter {|lunch| lunch.date > 5.days.ago } # get last day of last months (or first day of this months, use >=)
   end
 
