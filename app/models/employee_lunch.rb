@@ -29,7 +29,9 @@ class EmployeeLunch < ApplicationRecord
   private
 
   def notify_matched_employees
-    EmployeeMailer.send_request(lunch.employees)
+    unless lunch.employees.count < 2
+      EmployeeMailer.send_request(lunch.employees)
+    end
   end
 
   # Enforce no two employees can be saved if from the same department (the logic to find matches can be circumveneted and result in matching same dept)

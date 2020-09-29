@@ -17,6 +17,9 @@ require 'rails_helper'
 RSpec.describe '/employees', type: :request do
   # Employee. As you add validations to Employee, be sure to
   # adjust the attributes here as well.
+  let(:employee) { Employee.create!(email: "mex@you.com", password: "password123", name: 'Wau Wii', status: 'active', department: 'data') }
+  before(:each) { sign_in employee }
+
   let(:valid_attributes) do
     { name: 'Fredrick N', email: 'me@you.com', password: '1234567', password_confirmation: '1234567', department: 'data' }
   end
