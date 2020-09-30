@@ -52,11 +52,12 @@ all in one department etc (if no criteria is met): display no lunches this month
  [x] Email configuration including templates for newly registered users, plus sending out emails
  [X] Background cron job for match making service, triggered on x day of month. send emails for matches
  [x] Display matches on home page - with images etc
- [ ] Anonymous home page - disp login option
- [ ] Cleaner menu 
- [ ] HR only to view employees
+ [X] Anonymous home page - disp login option
+ [X] Cleaner menu 
  [X] Employee deletions
  [X] Email notifications for matches, registrations
+ [ ] Run match task if employee is added or deleted
+ [ ] Remove employee from current matches if deleted, then ran match task
  [ ] Third person/odd person handling
  [ ] Match only if previous is older than 3 months
  [ ] Docker configs/setup
@@ -68,3 +69,11 @@ all in one department etc (if no criteria is met): display no lunches this month
     # EmployeeMatchingJob.perform_later
 
     whenever --update-crontab
+
+    sudo systemctl stop postgresql 
+    sudo systemctl stop redis-server
+    sudo docker-compose up -d web jobs
+
+    start: sudo docker-compose up -d
+
+    # make sure the entrypoint.sh file is executable (has the executable bit set). chmod +x <your file>
