@@ -76,7 +76,7 @@ RSpec.describe Employee, type: :model do
   end
 
   describe 'Callbacks' do
-    it { expect(subject).to callback(:execute_matching).after(:save) }
-    it { expect(subject).to callback(:cleanup_current_lunches).before(:save) }
+    it { expect(subject).to callback(:execute_matching).after(:commit) }
+    it { expect(subject).to callback(:cleanup_current_lunches).before(:validation) }
   end
 end

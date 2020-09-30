@@ -39,7 +39,7 @@ RSpec.describe EmployeeLunch, type: :model do
   end
 
   describe 'Callbacks' do
-    it { expect(subject).to callback(:notify_matched_employees).after(:save) }
+    it { expect(subject).to callback(:notify_matched_employees).after(:commit) }
     it { expect(subject).to callback(:set_date).before(:validation) }
   end
 end
