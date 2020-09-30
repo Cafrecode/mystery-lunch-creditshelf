@@ -49,7 +49,7 @@ all in one department etc (if no criteria is met): display no lunches this month
 
  TODO:
 
- [/] Email configuration including templates for newly registered users, plus sending out emails
+ [x] Email configuration including templates for newly registered users, plus sending out emails
  [/] Background cron job for match making service, triggered on x day of month. send emails for matches
  [x] Display matches on home page - with images etc
  [ ] Cleanup
