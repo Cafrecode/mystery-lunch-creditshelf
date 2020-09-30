@@ -15,6 +15,7 @@ class EmployeeLunch < ApplicationRecord
   ############### Validations #############################
 
   validates_uniqueness_of :employee_id, scope: :lunch_id
+  validates_presence_of :employee_id, :lunch_id
   validate :different_department
 
   ############## Associations ##############################
