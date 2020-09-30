@@ -50,7 +50,7 @@ RSpec.describe Employee, type: :model do
     end
 
     it { expect(subject).to validate_presence_of(:department) }
-    it { expect(subject).to_not allow_value("Fred").for(:name) }
+    it { expect(subject).to_not allow_value('Fred').for(:name) }
   end
 
   describe 'Associations' do
@@ -73,11 +73,9 @@ RSpec.describe Employee, type: :model do
       maureen.save!
       expect(subject.match).to be_nil
     end
-
   end
 
-  describe "Callbacks" do
+  describe 'Callbacks' do
     it { expect(subject).to callback(:execute_matching).after(:save) }
   end
-  
 end

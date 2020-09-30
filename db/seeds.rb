@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -8,13 +9,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 employees = Employee.create([
-    {name: 'Lizzy Dimples', email: 'o.frederickn@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing'},
-    {name: 'Mary Karanja', email: 'frederick@cafrecode.co.ke', password: '123456', password_confirmation: '123456', department: 'sales'},
-    {name: 'Frank Wilbert', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations'},
-    {name: 'Maureen Caplan', email: 'frederickno@live.com', password: '123456', password_confirmation: '123456', department: 'data'},
-    {name: 'Collins Mucheru', email: 'o.frederick.n@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted'},
-    {name: 'Frederick Omala', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'data'}
-])
+                              { name: 'Lizzy Dimples', email: 'o.frederickn@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing' },
+                              { name: 'Mary Karanja', email: 'frederick@cafrecode.co.ke', password: '123456', password_confirmation: '123456', department: 'sales' },
+                              { name: 'Frank Wilbert', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations' },
+                              { name: 'Maureen Caplan', email: 'frederickno@live.com', password: '123456', password_confirmation: '123456', department: 'data' },
+                              { name: 'Collins Mucheru', email: 'o.frederick.n@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted' },
+                              { name: 'Frederick Omala', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'data' }
+                            ])
 
 lunch = Lunch.create!(date: 1.day.ago)
 

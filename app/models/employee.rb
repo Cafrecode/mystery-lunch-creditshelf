@@ -48,14 +48,14 @@ class Employee < ApplicationRecord
 
   ###################### Callbacks ##########################
 
-  after_save  :execute_matching
+  after_save :execute_matching
 
   ###################### Concerns ############################
 
   def get_mystery_match
     # get unmatched employees from diff department
     viable_matches = Employee.where.not(department: department, status: :deleted)
-    # Filter them based on their availability: have they been matched? 
+    # Filter them based on their availability: have they been matched?
     # Missing three month check to negate viability
     viable_matches.select(&:is_available).sample
   end
@@ -76,7 +76,7 @@ class Employee < ApplicationRecord
     # add both self and viable match if not nil to lunch - via employee lunch
     partner = get_mystery_match # We dont want to get two random parters! whoosh, that was close.
 
-    if self.is_available && partner.present?
+    if is_available && partner.present?
       lunch = Lunch.create!
       empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
       empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: partner)

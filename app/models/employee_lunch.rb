@@ -12,16 +12,14 @@
 #  lunch_id    :bigint
 #
 class EmployeeLunch < ApplicationRecord
-
-  scope :this_month, ->(from_date = 0.days.ago.beginning_of_month ) { where("created_at >= ? ", from_date) }
+  scope :this_month, ->(from_date = 0.days.ago.beginning_of_month) { where('created_at >= ? ', from_date) }
+  scope :previous_months, ->(before_date = 0.days.ago.beginning_of_month) { where('created_at < ?', before_date) }
 
   ############### Validations #############################
 
   validates_uniqueness_of :employee_id, scope: :lunch_id
   validates_uniqueness_of :employee_id, scope: :date
-
   validates_presence_of :employee_id, :lunch_id
-
   validate :different_department
 
   ############## Associations ##############################
@@ -31,27 +29,25 @@ class EmployeeLunch < ApplicationRecord
 
   ############# Callbacks ##################################
   # After saving, send email to relevant employees notifying of their being matches
-  after_save  :notify_matched_employees
+  after_save :notify_matched_employees
   before_validation :set_date
 
   private
 
   # Useful to validate unique lunches per month for employee
   def set_date
-    self.date = Time.now.strftime("%Y %m")
+    self.date = Time.now.strftime('%Y %m')
   end
 
   def notify_matched_employees
-    unless lunch.employees.count < 2
-      EmployeeMailer.send_request(lunch.employees)
-    end
+    EmployeeMailer.send_request(lunch.employees) unless lunch.employees.count < 2
   end
 
   # Enforce no two employees can be saved if from the same department (the logic to find matches can be circumveneted and result in matching same dept)
   def different_department
-    unless self.lunch.blank?
-      if self.lunch.employees.where(department: self.employee.department).count > 1
-        errors.add(:employee, "is not valid, they need to be from different depeartments")
+    unless lunch.blank?
+      if lunch.employees.where(department: employee.department).count > 1
+        errors.add(:employee, 'is not valid, they need to be from different depeartments')
       end
     end
   end

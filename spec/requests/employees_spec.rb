@@ -17,7 +17,7 @@ require 'rails_helper'
 RSpec.describe '/employees', type: :request do
   # Employee. As you add validations to Employee, be sure to
   # adjust the attributes here as well.
-  let(:employee) { Employee.create!(email: "mex@you.com", password: "password123", name: 'Wau Wii', status: 'active', department: 'data') }
+  let(:employee) { Employee.create!(email: 'mex@you.com', password: 'password123', name: 'Wau Wii', status: 'active', department: 'data') }
   before(:each) { sign_in employee }
 
   let(:valid_attributes) do
@@ -123,7 +123,7 @@ RSpec.describe '/employees', type: :request do
       delete employee_url(employee)
 
       employee.reload
-      expect(employee.status).to eq "deleted"
+      expect(employee.status).to eq 'deleted'
     end
 
     it 'redirects to the employees list' do

@@ -15,13 +15,11 @@ include HomeHelper
 #   end
 # end
 RSpec.describe HomeHelper, type: :helper do
-
   let(:lizzy) { Employee.create!(name: 'Lizzy D', email: 'lizzy@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing') }
   let(:frank) { Employee.create!(name: 'Frank DF', email: 'frank@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations') }
 
-  describe "Get Content" do
-
-    it "should retreive all matched employees for the current month" do
+  describe 'Get Content' do
+    it 'should retreive all matched employees for the current month' do
       expect(EmployeeLunch.current_partner_groups).to_not be_nil
     end
   end
