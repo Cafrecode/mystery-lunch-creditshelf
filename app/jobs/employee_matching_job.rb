@@ -34,7 +34,7 @@ class EmployeeMatchingJob < ApplicationJob
     # Check compatibility with all employees in lunch - department, last three months
       match = false
       lunch.employees.each do | prospect |
-        match = prospect.is_compatible(employee)
+        match = prospect.is_compatible(employee) && lunch.employees.count < 3 # To avoid 4 people groups
       end
 
       if match
