@@ -116,6 +116,8 @@ class Employee < ApplicationRecord
       # TODO: if current had 3 partners, delete only his employee_lunch record
       # orther if paired, delete all to free the other one for a match
         self.lunches.this_month.destroy_all
+        self.employee_lunches.this_month.destroy_all
+
       #end
     end
   end
