@@ -77,7 +77,7 @@ class Employee < ApplicationRecord
 
   def is_available
     # Should have an active status, and no lunches already matched this months
-    self.status == 'active' && (active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1))
+    self.status == 'active' && (active_lunches.empty? || (active_lunches.last.present? && active_lunches.last.employees.count <= 1))
   end
 
   def is_compatible (employee)
