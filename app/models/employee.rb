@@ -103,6 +103,6 @@ class Employee < ApplicationRecord
 
   # run when creating employee, or status changing from deleted to active
   def execute_matching
-    EmployeeMatchingJob.perform_later
+    EmployeeMatchingJob.perform_now # Do it sychronously to avoid checking for availability while someone might be yet persisted
   end
 end
