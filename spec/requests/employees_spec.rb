@@ -120,9 +120,10 @@ RSpec.describe '/employees', type: :request do
   describe 'DELETE /destroy' do
     it 'destroys the requested employee' do
       employee = Employee.create! valid_attributes
-      expect do
-        delete employee_url(employee)
-      end.to change(Employee, :count).by(-1)
+      delete employee_url(employee)
+
+      employee.reload
+      expect(employee.status).to eq "deleted"
     end
 
     it 'redirects to the employees list' do
