@@ -7,6 +7,7 @@ class EmployeeMatchingJob < ApplicationJob
     # Do something later
     # get all employees and create matches for x month
     puts 'running the match making task now'
-    Employee.all.map(&:match)
+    res = Employee.all.map(&:match)
+    puts 'matching result: ' + res.inspect
   end
 end

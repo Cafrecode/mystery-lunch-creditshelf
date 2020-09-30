@@ -67,7 +67,7 @@ class Employee < ApplicationRecord
     # if empty,employee is available
     # if not empty, check that they have been matched with just one (self -- unless the third persion)
     ## Lunches in the last 3months with self?
-    active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1)
+    self.status == 'active' && (active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1))
   end
 
   def match
@@ -104,14 +104,14 @@ class Employee < ApplicationRecord
 
   # run when creating employee, or status changing from deleted to active
   def execute_matching
-    EmployeeMatchingJob.perform_now # Do it sychronously to avoid checking for availability while someone might be yet persisted
+    EmployeeMatchingJob.perform_later
   end
 
   def cleanup_current_lunches 
     if self.status == 'deleted'
-      unless self.employee_lunches.this_month.blank?
-        self.employee_lunches.this_month.destroy_all
-      end
+      #unless self.lunches.this_month.blank?
+        self.lunches.this_month.destroy_all
+      #end
     end
   end
 end
