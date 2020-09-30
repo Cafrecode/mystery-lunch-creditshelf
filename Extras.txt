@@ -56,13 +56,16 @@ all in one department etc (if no criteria is met): display no lunches this month
  [X] Cleaner menu 
  [X] Employee deletions
  [X] Email notifications for matches, registrations
- [ ] Run match task if employee is added or deleted
+ [ ] Run match task if employee is added
+ [ ] Run match when employee is deleted
+ [ ] Delete employee's current lunch if this month to enable re-match
  [ ] Remove employee from current matches if deleted, then ran match task
  [ ] Third person/odd person handling
  [ ] Match only if previous is older than 3 months
  [X] Docker configs/setup
  [ ] Production deployment
  [ ] Cleanup/Documentation
+ [x] Refine matching algo to dissallow more than one lunch per employee per month
 
      # probably not the best place for this, but temporary
     # EmployeeMatchingJob.set(wait_until: 0.days.from_now.end_of_month + 1.second).perform_later

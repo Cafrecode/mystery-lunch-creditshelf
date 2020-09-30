@@ -49,6 +49,7 @@ class Employee < ApplicationRecord
   ###################### Callbacks ##########################
 
   after_save :execute_matching
+  before_save :cleanup_current_lunches
 
   ###################### Concerns ############################
 
@@ -104,5 +105,13 @@ class Employee < ApplicationRecord
   # run when creating employee, or status changing from deleted to active
   def execute_matching
     EmployeeMatchingJob.perform_now # Do it sychronously to avoid checking for availability while someone might be yet persisted
+  end
+
+  def cleanup_current_lunches 
+    if self.status == 'deleted'
+      unless self.employee_lunches.this_month.blank?
+        self.employee_lunches.this_month.destroy_all
+      end
+    end
   end
 end

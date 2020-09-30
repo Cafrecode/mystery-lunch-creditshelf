@@ -12,6 +12,7 @@
 #  lunch_id    :bigint
 #
 class EmployeeLunch < ApplicationRecord
+  
   scope :this_month, ->(from_date = 0.days.ago.beginning_of_month) { where('created_at >= ? ', from_date) }
   scope :previous_months, ->(before_date = 0.days.ago.beginning_of_month) { where('created_at < ?', before_date) }
 
