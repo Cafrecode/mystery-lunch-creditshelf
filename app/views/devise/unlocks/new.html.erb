@@ -1,44 +1,50 @@
-<!--<h2>Resend unlock instructions</h2>-->
-<section class="row flexbox-container">
-  <div class="col-xl-8 col-11 d-flex justify-content-center">
-    <div class="card bg-authentication rounded-0 mb-0">
-      <div class="row m-0">
-        <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
-          <img src="/app-assets/images/pages/login.png" alt="branding logo">
-        </div>
-        <div class="col-lg-6 col-12 p-0">
-          <div class="card rounded-0 mb-0 px-2">
-            <div class="card-header pb-1">
-              <div class="card-title">
-                <br>
-                <h4 class="mb-0">Resend unlock instructions</h4>
+<% content_for :main do %>
+
+<body
+  class="horizontal-layout horizontal-menu 1-column  navbar-floating footer-static bg-full-screen-image  blank-page blank-page"
+  data-open="hover" data-menu="horizontal-menu" data-col="1-column">
+  <% end %>
+
+  <section class="row flexbox-container">
+    <div class="col-xl-8 col-11 d-flex justify-content-center">
+      <div class="card bg-authentication rounded-0 mb-0">
+        <div class="row m-0">
+          <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
+            <img src="/app-assets/images/pages/login.png" alt="branding logo">
+          </div>
+          <div class="col-lg-6 col-12 p-0">
+            <div class="card rounded-0 mb-0 px-2">
+              <div class="card-header pb-1">
+                <div class="card-title">
+                  <br>
+                  <h4 class="mb-0">Resend unlock instructions</h4>
+                </div>
               </div>
-            </div>
 
 
-            <div class="card-content">
-              <div class="card-body pt-1">
-                <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-                <%= render "devise/shared/error_messages", resource: resource %>
-                <fieldset class="form-label-group form-group position-relative has-icon-left">
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-                  <div class="form-control-position">
-                    <i class="feather icon-user"></i>
-                  </div>
-                  <label for="user-name">Email</label>
-                </fieldset>
+              <div class="card-content">
+                <div class="card-body pt-1">
+                  <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+                  <%= render "devise/shared/error_messages", resource: resource %>
+                  <fieldset class="form-label-group form-group position-relative has-icon-left">
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+                    <div class="form-control-position">
+                      <i class="feather icon-user"></i>
+                    </div>
+                    <label for="user-name">Email</label>
+                  </fieldset>
 
-                <button type="submit" class="btn btn-primary  btn-inline">Resend unlock instructions</button>
-                <% end %>
+                  <button type="submit" class="btn btn-primary  btn-inline">Resend unlock instructions</button>
+                  <% end %>
 
-                <%= render "devise/shared/links" %>
+                  <%= render "devise/shared/links" %>
 
 
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
