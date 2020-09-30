@@ -12,7 +12,7 @@ employees = Employee.create([
     {name: 'Mary FG', email: 'frederick@cafrecode.co.ke', password: '123456', password_confirmation: '123456', department: 'sales'},
     {name: 'Frank DF', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations'},
     {name: 'Maureen FG', email: 'frederickno@live.com', password: '123456', password_confirmation: '123456', department: 'data'},
-    {name: 'Maureen FG', email: 'o..frederickn@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted'},
+    {name: 'Maureen FG', email: 'o.frederick.n@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted'},
     {name: 'Frederick Om', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'data'}
 ])
 
