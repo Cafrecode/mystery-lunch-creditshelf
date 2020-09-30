@@ -27,6 +27,8 @@ class Employee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  attr_accessor :is_new
+
   enum status: %i[active deleted]
 
   # Use an enum for the various departments (might not be ideal, but should work for this)
@@ -49,6 +51,7 @@ class Employee < ApplicationRecord
   ###################### Callbacks ##########################
 
   after_commit :execute_matching
+  after_create :set_is_new
   before_validation :cleanup_current_lunches
 
   ###################### Concerns ############################
@@ -105,25 +108,22 @@ class Employee < ApplicationRecord
 
   ############## Callback utils #######################################
 
+  def set_is_new
+    self.is_new = true
+  end
+
   # run when creating employee, or status changing from deleted to active
   def execute_matching
-    EmployeeMatchingJob.perform_later
+   if is_new
+      EmployeeMatchingJob.perform_later self
+    else
+      EmployeeMatchingJob.perform_later
+    end
   end
 
   def cleanup_current_lunches 
-    puts 'status off#####################################: ' + self.inspect + ' ' + self.status
     if self.status == 'deleted'
-      # TODO: if current had 3 partners, delete only his employee_lunch record
-      # orther if paired, delete all to free the other one for a match
-      # self.lunches.this_month.this_month.destroy_all
       self.employee_lunches.this_month.destroy_all
-      # unless self.lunches.this_month.first.blank?
-      #     if self.lunches.this_month.first.employee_lunches.count < 3
-      #       self.lunches.this_month.destroy_all
-      #     else 
-      #       self.employee_lunches.this_month.first.destroy
-      #     end
-      #   end
     end
   end
 end
