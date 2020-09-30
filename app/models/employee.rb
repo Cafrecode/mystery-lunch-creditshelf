@@ -48,8 +48,8 @@ class Employee < ApplicationRecord
 
   ###################### Callbacks ##########################
 
-  after_save :execute_matching
-  before_save :cleanup_current_lunches
+  after_commit :execute_matching
+  before_validation :cleanup_current_lunches
 
   ###################### Concerns ############################
 
@@ -111,11 +111,12 @@ class Employee < ApplicationRecord
   end
 
   def cleanup_current_lunches 
+    puts 'status off#####################################: ' + self.inspect + ' ' + self.status
     if self.status == 'deleted'
       # TODO: if current had 3 partners, delete only his employee_lunch record
       # orther if paired, delete all to free the other one for a match
+      # self.lunches.this_month.this_month.destroy_all
       self.employee_lunches.this_month.destroy_all
-
       # unless self.lunches.this_month.first.blank?
       #     if self.lunches.this_month.first.employee_lunches.count < 3
       #       self.lunches.this_month.destroy_all

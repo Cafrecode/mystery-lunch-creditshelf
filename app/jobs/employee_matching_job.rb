@@ -11,6 +11,8 @@ class EmployeeMatchingJob < ApplicationJob
 
     unmatched = Employee.all.filter { |em| em.is_available }
 
+    puts 'unmatched eh *****************************************************!' + unmatched.inspect
+
     if unmatched.count == 1 # Just check for one, we can possibly have more than one surely
       match_odd_employee(unmatched.first)
       puts 'unmatched eh!' + unmatched.first.inspect
