@@ -8,12 +8,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 employees = Employee.create([
-    {name: 'Lizzy D', email: 'lizzy@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing'},
-    {name: 'Mary FG', email: 'mary@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales'},
-    {name: 'Frank DF', email: 'frank@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations'},
-    {name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'data'},
-    {name: 'Maureen FG', email: 'maryw@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted'},
-    {name: 'Frederick Om', email: 'frederick@gmail.com', password: '123456', password_confirmation: '123456', department: 'data'}
+    {name: 'Lizzy D', email: 'o.frederickn@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing'},
+    {name: 'Mary FG', email: 'frederick@cafrecode.co.ke', password: '123456', password_confirmation: '123456', department: 'sales'},
+    {name: 'Frank DF', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations'},
+    {name: 'Maureen FG', email: 'frederickno@live.com', password: '123456', password_confirmation: '123456', department: 'data'},
+    {name: 'Maureen FG', email: 'o..frederickn@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted'},
+    {name: 'Frederick Om', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'data'}
 ])
 
 lunch = Lunch.create!(date: 1.day.ago)

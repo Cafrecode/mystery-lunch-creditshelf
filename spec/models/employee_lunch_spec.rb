@@ -33,5 +33,10 @@ RSpec.describe EmployeeLunch, type: :model do
 
       expect(subject).to_not be_valid
     end
+
+  end
+
+  describe "Callbacks" do
+    it { expect(subject).to callback(:notify_matched_employees).after(:save) }
   end
 end

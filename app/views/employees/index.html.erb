@@ -17,25 +17,28 @@ active
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
-                                <tr>                                    <th>Name</th>
-                                                                        <th>Department</th>
-                                                                        <th>Status</th>
-                                    
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+
                                     <th>Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <% @employees.each do |employee| %>
-                                    <tr>                                        <td><%= employee.name %></td>
-                                                                                <td><%= employee.department %></td>
-                                                                                <td><%= employee.status %></td>
-                                        
-                                        <td><%= link_to "View" , employee %>
-                                            <%= link_to "Edit" , edit_employee_path(employee) %>
-                                        </td>
-                                    </tr>
-                                    <% end %>
+                                <tr>
+                                    <td><%= employee.name %></td>
+                                    <td><%= employee.department %></td>
+                                    <td><%= employee.status %></td>
+
+                                    <td><%= link_to "View" , employee %>
+                                        <%= link_to "Edit" , edit_employee_path(employee) %>
+                                        <%= link_to 'Delete', employee, method: :delete, data: { confirm: 'Are you sure?' } %>
+                                    </td>
+                                </tr>
+                                <% end %>
                             </tbody>
                         </table>
                     </div>
@@ -45,8 +48,8 @@ active
 
                     </div>
                     </p>
-                     <div class="flex items-center justify-start mt-6">
-                            <%= link_to 'New Employee' , new_employee_path, class: "btn btn-outline-dark mr-1 mb-1" %>
+                    <div class="flex items-center justify-start mt-6">
+                        <%= link_to 'New Employee' , new_employee_path, class: "btn btn-outline-dark mr-1 mb-1" %>
                     </div>
                 </div>
             </div>

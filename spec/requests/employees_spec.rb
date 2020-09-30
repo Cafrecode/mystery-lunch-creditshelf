@@ -17,6 +17,9 @@ require 'rails_helper'
 RSpec.describe '/employees', type: :request do
   # Employee. As you add validations to Employee, be sure to
   # adjust the attributes here as well.
+  let(:employee) { Employee.create!(email: "mex@you.com", password: "password123", name: 'Wau Wii', status: 'active', department: 'data') }
+  before(:each) { sign_in employee }
+
   let(:valid_attributes) do
     { name: 'Fredrick N', email: 'me@you.com', password: '1234567', password_confirmation: '1234567', department: 'data' }
   end
@@ -117,9 +120,10 @@ RSpec.describe '/employees', type: :request do
   describe 'DELETE /destroy' do
     it 'destroys the requested employee' do
       employee = Employee.create! valid_attributes
-      expect do
-        delete employee_url(employee)
-      end.to change(Employee, :count).by(-1)
+      delete employee_url(employee)
+
+      employee.reload
+      expect(employee.status).to eq "deleted"
     end
 
     it 'redirects to the employees list' do

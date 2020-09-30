@@ -42,6 +42,8 @@ gem 'mini_magick'
 # Email things, with mailjet service provider
 gem 'mailjet'
 
+gem 'solargraph'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -58,6 +60,8 @@ group :development, :test do
   gem 'simplecov', '0.17'
 
   gem 'shoulda-matchers'
+
+  gem 'shoulda-callback-matchers', '~> 1.1.1'
 
   gem 'rails-controller-testing'
 

@@ -48,6 +48,9 @@ RSpec.describe Employee, type: :model do
       subject.name = 'Fred'
       expect(subject).to_not be_valid
     end
+
+    it { expect(subject).to validate_presence_of(:department) }
+    it { expect(subject).to_not allow_value("Fred").for(:name) }
   end
 
   describe 'Associations' do
@@ -66,6 +69,7 @@ RSpec.describe Employee, type: :model do
 
     it 'can match with another employee' do
       lizzy.save!
+      subject.save!
       expect(subject.match).to_not be_nil
     end
 
@@ -86,6 +90,7 @@ RSpec.describe Employee, type: :model do
       el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch, date: 1.day.ago)
       el2.save!
 
+      subject.save!
       el1 = EmployeeLunch.create!(employee: subject, lunch: lunch, date: 1.day.ago)
       el1.save!
 
@@ -100,6 +105,7 @@ RSpec.describe Employee, type: :model do
       el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch, date: 1.day.ago)
       el2.save!
 
+      subject.save!
       el1 = EmployeeLunch.create!(employee: subject, lunch: lunch, date: 1.day.ago)
       el1.save!
 
