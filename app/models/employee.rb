@@ -46,6 +46,12 @@ class Employee < ApplicationRecord
   has_many  :employee_lunches
   has_many  :lunches, through: :employee_lunches
 
+  ###################### Callbacks ##########################
+
+  after_save  :execute_matching
+
+  ###################### Concerns ############################
+
   def get_mystery_match
     # get unmatched employees from diff department
     viable_matches = Employee.where.not(department: department, status: :deleted)
@@ -68,10 +74,12 @@ class Employee < ApplicationRecord
     # create lunch, date is now -- created at, whatver
     # create employee lunch
     # add both self and viable match if not nil to lunch - via employee lunch
-    if self.is_available && get_mystery_match.present?
+    partner = get_mystery_match # We dont want to get two random parters! whoosh, that was close.
+
+    if self.is_available && partner.present?
       lunch = Lunch.create!
       empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
-      empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: get_mystery_match)
+      empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: partner)
     end
   end
 
@@ -83,9 +91,18 @@ class Employee < ApplicationRecord
 
   # Filter specific partner for past 3 months match
 
+  ############### Validation utils ###################################
+
   def has_full_name
     if name.gsub(/\s+/m, ' ').strip.split(' ').length < 2
       errors.add(:name, 'is not a valid name, use space separated full name')
     end
+  end
+
+  ############## Callback utils #######################################
+
+  # run when creating employee, or status changing from deleted to active
+  def execute_matching
+    EmployeeMatchingJob.perform_later
   end
 end

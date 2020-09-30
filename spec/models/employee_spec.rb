@@ -63,14 +63,10 @@ RSpec.describe Employee, type: :model do
       lizzy.save!
       frank.save!
       mary.save!
-      expect(subject.get_mystery_match).to_not be_nil
-      expect(subject.get_mystery_match.department).to_not eq(subject.department)
-    end
 
-    it 'can match with another employee' do
-      lizzy.save!
-      subject.save!
-      expect(subject.match).to_not be_nil
+      match = subject.get_mystery_match
+      expect(match).to_not be_nil
+      expect(match.department).to_not eq(subject.department)
     end
 
     it 'cannot match with an employee of the same department' do
@@ -80,36 +76,8 @@ RSpec.describe Employee, type: :model do
 
   end
 
-  describe 'Availability' do
-    it 'is not available if already has a match with another employee' do
-      # create a lunch (the matching will be moved to the model)
-      lunch = Lunch.create!(date: 1.day.ago)
-      lunch.save!
-
-      # Pair up with one employee
-      el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch, date: 1.day.ago)
-      el2.save!
-
-      subject.save!
-      el1 = EmployeeLunch.create!(employee: subject, lunch: lunch, date: 1.day.ago)
-      el1.save!
-
-      expect(subject.is_available).to eq false
-    end
-
-    it 'is available if the last match(with employee x) was over 3 months ago' do # refine this spec
-      lunch = Lunch.create!(date: 1.day.ago, created_at: 3.months.ago)
-      lunch.save!
-
-      # Pair up with one employee
-      el2 = EmployeeLunch.create!(employee: lizzy, lunch: lunch, date: 1.day.ago)
-      el2.save!
-
-      subject.save!
-      el1 = EmployeeLunch.create!(employee: subject, lunch: lunch, date: 1.day.ago)
-      el1.save!
-
-      expect(subject.is_available).to eq true
-    end
+  describe "Callbacks" do
+    it { expect(subject).to callback(:execute_matching).after(:save) }
   end
+  
 end

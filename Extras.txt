@@ -60,7 +60,7 @@ all in one department etc (if no criteria is met): display no lunches this month
  [ ] Remove employee from current matches if deleted, then ran match task
  [ ] Third person/odd person handling
  [ ] Match only if previous is older than 3 months
- [ ] Docker configs/setup
+ [X] Docker configs/setup
  [ ] Production deployment
  [ ] Cleanup/Documentation
 
