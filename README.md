@@ -74,7 +74,7 @@ While the matching should work in most cases, some instances might leave un matc
 1. Employees are notified via email once matches are made
 2. Employees can either browse anonymously to view matches or create accounts and sign in to be able to add employees. Even though there were plans to restrict access to the employee management to only employees in the HR dept, the plans were shelved to ease interaction flexibility.
 3. When an employee is created, an auto generated password is emailed to them. They can also self-register.
-4. Images are uploaded to AWS and are available via CDN.
+4. Employees can view their profiles and upload images after logging in. Images are uploaded to AWS and are available via CDN.
 
 #### Other
 
