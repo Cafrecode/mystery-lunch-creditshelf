@@ -54,7 +54,7 @@ The app uses the `whenever` gem to schedule the monthly recurring matching job.
 
 The application's domain model is shown below. A good amount of the match selection is handled by the `Employee` model directly, while the other two namely `Lunch` and `EmployeeLunch` provide a decent way of keeping track of matched partners.
 
-![Domain Model](domain-model.png)
+![Domain Model](domain_model.png)
 
 For two employees, the matching is accomplished by the following outlined behaviours and attributes of the `Employee` model to satisfy the criteria:
 
