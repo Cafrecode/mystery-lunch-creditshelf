@@ -39,7 +39,9 @@ class EmployeeLunch < ApplicationRecord
 
   # Useful to validate unique lunches per month for employee
   def set_date
-    self.date = Time.now.strftime('%Y %m')
+    unless self.date.present?
+      self.date = Time.now.strftime('%Y %m')
+    end
   end
 
   def notify_matched_employees
