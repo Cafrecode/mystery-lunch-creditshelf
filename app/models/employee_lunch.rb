@@ -16,6 +16,8 @@ class EmployeeLunch < ApplicationRecord
   scope :this_month, ->(from_date = 0.days.ago.beginning_of_month) { where('created_at >= ? ', from_date) }
   scope :previous_months, ->(before_date = 0.days.ago.beginning_of_month) { where('created_at < ?', before_date) }
 
+  scope :previous_three_months, ->(employee_ids, from_date = 3.months.ago.beginning_of_month, to_date = 0.days.ago.beginning_of_month ) { where("employee_id IN (?) AND created_at >= ? AND created_at < ?", employee_ids, from_date, to_date)}
+
   ############### Validations #############################
 
   validates_uniqueness_of :employee_id, scope: :lunch_id
