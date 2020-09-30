@@ -53,23 +53,6 @@ class Employee < ApplicationRecord
 
   ###################### Concerns ############################
 
-  def get_mystery_match
-    # get unmatched employees from diff department
-    viable_matches = Employee.where.not(department: department, status: :deleted)
-    # Filter them based on their availability: have they been matched?
-    # Missing three month check to negate viability
-    viable_matches.select(&:is_available).sample
-  end
-
-  def is_available
-    # Get any lunches created after last day of last month
-    ## Lunches this months:
-    # if empty,employee is available
-    # if not empty, check that they have been matched with just one (self -- unless the third persion)
-    ## Lunches in the last 3months with self?
-    self.status == 'active' && (active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1))
-  end
-
   def match
     # match employees?, assuming ideal conditions. work on edge cases later
     # create lunch, date is now -- created at, whatver
@@ -84,6 +67,19 @@ class Employee < ApplicationRecord
     end
   end
 
+  def get_mystery_match
+    # get unmatched employees from diff department
+    viable_matches = Employee.where.not(department: department, status: :deleted)
+    # Filter them based on their availability: have they been matched?
+    # Missing three month check to negate viability
+    viable_matches.select(&:is_available).sample
+  end
+
+  def is_available
+    # Should have an active status, and no lunches already matched this months
+    self.status == 'active' && (active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1))
+  end
+  
   private
 
   def active_lunches # lunches this month for this Employee,if any. Take care not to create a lot of them? Only consider first one
