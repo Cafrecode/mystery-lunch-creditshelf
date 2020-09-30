@@ -12,9 +12,14 @@
 #  lunch_id    :bigint
 #
 class EmployeeLunch < ApplicationRecord
+
+  scope :this_month, ->(from_date = 0.days.ago.beginning_of_month ) { where("created_at >= ? ", from_date) }
+
   ############### Validations #############################
 
   validates_uniqueness_of :employee_id, scope: :lunch_id
+  validates_uniqueness_of :employee_id, scope: :this_month
+
   validates_presence_of :employee_id, :lunch_id
   validate :different_department
 
