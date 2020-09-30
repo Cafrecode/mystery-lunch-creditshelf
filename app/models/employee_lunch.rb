@@ -32,7 +32,7 @@ class EmployeeLunch < ApplicationRecord
 
   ############# Callbacks ##################################
   # After saving, send email to relevant employees notifying of their being matches
-  after_save :notify_matched_employees
+  after_commit :notify_matched_employees
   before_validation :set_date
 
   private

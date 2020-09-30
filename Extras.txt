@@ -56,13 +56,14 @@ all in one department etc (if no criteria is met): display no lunches this month
  [X] Cleaner menu 
  [X] Employee deletions
  [X] Email notifications for matches, registrations
- [ ] Run match task if employee is added
- [ ] Run match when employee is deleted
- [ ] Delete employee's current lunch if this month to enable re-match
- [ ] Remove employee from current matches if deleted, then ran match task
- [ ] Third person/odd person handling
- [ ] Match only if previous is older than 3 months
+ [X] Run match task if employee is added
+ [X] Run match when employee is deleted
+ [X] Delete employee's current lunch if this month to enable re-match
+ [X] Remove employee from current matches if deleted, then ran match task
+ [X] Third person/odd person handling
+ [X] Match only if previous is older than 3 months
  [X] Docker configs/setup
+ [ ] Match new employees to a 3-person group automatically, regardless of deficit
  [ ] Production deployment
  [ ] Cleanup/Documentation
  [x] Refine matching algo to dissallow more than one lunch per employee per month

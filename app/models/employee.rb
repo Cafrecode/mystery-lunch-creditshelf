@@ -48,8 +48,8 @@ class Employee < ApplicationRecord
 
   ###################### Callbacks ##########################
 
-  after_save :execute_matching
-  before_save :cleanup_current_lunches
+  after_commit :execute_matching
+  before_validation :cleanup_current_lunches
 
   ###################### Concerns ############################
 
@@ -62,8 +62,8 @@ class Employee < ApplicationRecord
 
     if is_available && partner.present? && no_match_in_the_last_three_months(partner)
       lunch = Lunch.create!
-      empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
-      empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: partner)
+      EmployeeLunch.create!(lunch: lunch, employee: self)
+      EmployeeLunch.create!(lunch: lunch, employee: partner)
     end
   end
 
@@ -79,7 +79,11 @@ class Employee < ApplicationRecord
     # Should have an active status, and no lunches already matched this months
     self.status == 'active' && (active_lunches.empty? || (active_lunches.first.present? && active_lunches.first.employees.count <= 1))
   end
-  
+
+  def is_compatible (employee)
+    employee.department != self.department && no_match_in_the_last_three_months(employee) && self.status == 'active' && employee.status == 'active'
+  end
+
   private
 
   def active_lunches # lunches this month for this Employee,if any. Take care not to create a lot of them? Only consider first one
@@ -107,10 +111,19 @@ class Employee < ApplicationRecord
   end
 
   def cleanup_current_lunches 
+    puts 'status off#####################################: ' + self.inspect + ' ' + self.status
     if self.status == 'deleted'
-      #unless self.lunches.this_month.blank?
-        self.lunches.this_month.destroy_all
-      #end
+      # TODO: if current had 3 partners, delete only his employee_lunch record
+      # orther if paired, delete all to free the other one for a match
+      # self.lunches.this_month.this_month.destroy_all
+      self.employee_lunches.this_month.destroy_all
+      # unless self.lunches.this_month.first.blank?
+      #     if self.lunches.this_month.first.employee_lunches.count < 3
+      #       self.lunches.this_month.destroy_all
+      #     else 
+      #       self.employee_lunches.this_month.first.destroy
+      #     end
+      #   end
     end
   end
 end
