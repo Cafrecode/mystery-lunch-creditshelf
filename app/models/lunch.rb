@@ -11,10 +11,14 @@
 #  updated_at :datetime         not null
 #
 class Lunch < ApplicationRecord
+
+  scope :this_month, -> (from_date = 0.days.ago.beginning_of_month) { where("lunches.created_at >= ? ", from_date) }
+
   ################## Validations ########################
 
   ################## Associations #######################
 
-  has_many    :employee_lunches
+  has_many    :employee_lunches, dependent: :destroy
   has_many    :employees, through: :employee_lunches
+
 end

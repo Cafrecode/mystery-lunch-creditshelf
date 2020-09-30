@@ -23,4 +23,16 @@ active
 
         <% end %>
 
+        <br>
+        <h2>Previous Mystery Lunch Partners</h2>
+
+        <% previous_partner_groups.each_with_index do |matches, index| %>
+
+        <!-- The query returns the first result as the lunch, the rest as the employee lunches -->
+        <% flat = matches.flatten() %>
+        <% flat.shift %>
+        <%= render 'pair', employee_lunches: flat, index: index %>
+
+        <% end %>
+
     </section>
