@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: mystery_lunch_creditshelf_production
-  username: mystery_lunch_creditshelf
-  password: <%= ENV['MYSTERY_LUNCH_CREDITSHELF_DATABASE_PASSWORD'] %>
+  username: ubuntu
+  password: desmosedici # Move this to an env var
