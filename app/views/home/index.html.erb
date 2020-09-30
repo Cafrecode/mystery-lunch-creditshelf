@@ -1,14 +1,26 @@
-<section class="page-users-view">
+<% content_for :home do %>
+active
+<% end %>
 
-    <h2>Current Mystery Lunch Partners</h2>
+<% content_for :main do %>
 
-    <% current_partner_groups.each_with_index do |matches, index| %>
-
-    <!-- The query returns the first result as the lunch, the rest as the employee lunches -->
-    <% flat = matches.flatten() %>
-    <% flat.shift %>
-    <%= render 'pair', employee_lunches: flat, index: index %>
-
+<body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-floating footer-static  "
+    data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
+    <%= render partial: 'shared/header' %>
+    <%= render partial: 'shared/menu' %>
     <% end %>
 
-</section>
+    <section class="page-users-view">
+
+        <h2>Current Mystery Lunch Partners</h2>
+
+        <% current_partner_groups.each_with_index do |matches, index| %>
+
+        <!-- The query returns the first result as the lunch, the rest as the employee lunches -->
+        <% flat = matches.flatten() %>
+        <% flat.shift %>
+        <%= render 'pair', employee_lunches: flat, index: index %>
+
+        <% end %>
+
+    </section>

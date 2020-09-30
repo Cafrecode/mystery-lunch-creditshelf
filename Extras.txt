@@ -50,17 +50,18 @@ all in one department etc (if no criteria is met): display no lunches this month
  TODO:
 
  [x] Email configuration including templates for newly registered users, plus sending out emails
- [/] Background cron job for match making service, triggered on x day of month. send emails for matches
+ [X] Background cron job for match making service, triggered on x day of month. send emails for matches
  [x] Display matches on home page - with images etc
- [ ] Cleanup/Documentation
- [ ] Anonymous home page - disp login option, cleaner menu
- [ ] Docker configs/setup
- [ ] Production deployment
+ [ ] Anonymous home page - disp login option
+ [ ] Cleaner menu 
+ [ ] HR only to view employees
  [X] Employee deletions
+ [X] Email notifications for matches, registrations
  [ ] Third person/odd person handling
  [ ] Match only if previous is older than 3 months
- [X] Email notifications for matches, registrations
- [X] Add cron tab support to run matching (inc instruction on scheduling from console?)
+ [ ] Docker configs/setup
+ [ ] Production deployment
+ [ ] Cleanup/Documentation
 
      # probably not the best place for this, but temporary
     # EmployeeMatchingJob.set(wait_until: 0.days.from_now.end_of_month + 1.second).perform_later
