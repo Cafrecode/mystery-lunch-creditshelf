@@ -77,7 +77,7 @@ class Employee < ApplicationRecord
     # add both self and viable match if not nil to lunch - via employee lunch
     partner = get_mystery_match # We dont want to get two random parters! whoosh, that was close.
 
-    if is_available && partner.present? && no_match_in_the_last_three_months (partner)
+    if is_available && partner.present? && no_match_in_the_last_three_months(partner)
       lunch = Lunch.create!
       empl_lunch1 = EmployeeLunch.create!(lunch: lunch, employee: self)
       empl_lunch2 = EmployeeLunch.create!(lunch: lunch, employee: partner)
