@@ -10,7 +10,7 @@
     <p>Dear <%= @employee.name %>, you have been matched for the Mystery Lunch! See the people/person below:</p>
 
     <% @employees.each do |employee| %>
-    <span><%= employee.name %> </span>
+    <span><%= employee.name %>, </span>
     <% end %>
 
     <p> You can connect to the platform on:
