@@ -35,7 +35,7 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = false # to do, change to true to send out mails
   config.action_mailer.delivery_method = :mailjet_api
   config.action_mailer.asset_host = 'https://mystery.cafrecode.co.ke'
 

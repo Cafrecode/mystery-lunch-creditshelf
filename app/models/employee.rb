@@ -81,7 +81,7 @@ class Employee < ApplicationRecord
   end
 
   def is_compatible (employee)
-    employee.department != self.department && no_match_in_the_last_three_months(employee)
+    employee.department != self.department && no_match_in_the_last_three_months(employee) && self.status == 'active' && employee.status == 'active'
   end
 
   private
@@ -112,13 +112,17 @@ class Employee < ApplicationRecord
 
   def cleanup_current_lunches 
     if self.status == 'deleted'
-      # unless self.lunches.this_month.blank?
       # TODO: if current had 3 partners, delete only his employee_lunch record
       # orther if paired, delete all to free the other one for a match
-        self.lunches.this_month.destroy_all
-        self.employee_lunches.this_month.destroy_all
+      self.employee_lunches.this_month.destroy_all
 
-      #end
+      # unless self.lunches.this_month.first.blank?
+      #     if self.lunches.this_month.first.employee_lunches.count < 3
+      #       self.lunches.this_month.destroy_all
+      #     else 
+      #       self.employee_lunches.this_month.first.destroy
+      #     end
+      #   end
     end
   end
 end
