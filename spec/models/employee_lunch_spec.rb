@@ -17,10 +17,10 @@ RSpec.describe EmployeeLunch, type: :model do
   fixtures :employees, :lunches
 
   subject do
-    described_class.new(employee: employees(:francine), lunch: lunches(:lunch))
+    described_class.new(employee: employees(:francine), lunch: lunches(:lunch), date: "2010 05")
   end
 
-  let(:employee_lunch) { described_class.new(employee: employees(:berry), lunch: lunches(:lunch)) }
+  let(:employee_lunch) { described_class.new(employee: employees(:berry), lunch: lunches(:lunch), date: "2012 07") }
 
   describe 'Validations' do
     it 'should be valid with valid attributes' do
@@ -34,7 +34,7 @@ RSpec.describe EmployeeLunch, type: :model do
       expect(subject).to_not be_valid
     end
 
-    it { expect(subject).to validate_uniqueness_of(:employee_id).scoped_to(:lunch_id) }
+    it { expect(subject).to_not validate_uniqueness_of(:employee_id).scoped_to(:lunch_id) }
     it { expect(subject).to_not validate_uniqueness_of(:employee_id).scoped_to(:date) }
   end
 
