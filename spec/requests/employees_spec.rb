@@ -25,7 +25,7 @@ RSpec.describe '/employees', type: :request do
   end
 
   let(:invalid_attributes) do
-    { name: 'Fredrick N87', password: 'woow' }
+    { name: 'Fredrick', password: 'woow' }
   end
 
   describe 'GET /index' do

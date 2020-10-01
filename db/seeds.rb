@@ -15,14 +15,17 @@ employees = Employee.create([
                             ])
 
 # Create 17 to make an odd 19
-17.times do
-  Employee.create(
-    name: Faker::Name.name, 
-    email: Faker::Internet.email, 
-    password: '123456', 
-    password_confirmation: '123456', 
-    department: Employee.departments.map {|k, v| k }.sample)
-end
+
+17.times do |index|
+    employee = Employee.new(
+                              name: Faker::Name.name, 
+                              email: Faker::Internet.email, 
+                              password: '123456', 
+                              password_confirmation: '123456', 
+                              department: Employee.departments.map {|k, v| k }.sample)
+    employee.avatar.attach(io: File.open(Rails.root.join('db').to_s + '/faces/' + (index+1).to_s + '.jpg'), filename: 'avatar.jpg', content_type: 'image/jpeg')
+    employee.save!
+  end
 
 # Clear the lucnhes that get assigned to new employees when created
 ['lunches', 'employee_lunches'].each do |table|

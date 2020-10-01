@@ -26,6 +26,6 @@ RSpec.describe 'employees/index', type: :view do
     render
     assert_select 'tr>td', text: 'Name QW'.to_s, count: 1
     assert_select 'tr>td', text: 'Name DS'.to_s, count: 1
-    assert_select 'tr>td', text: 'marketing'.to_s, count: 2
+    assert_select 'tr>td', text: 'Marketing'.to_s, count: 2
   end
 end

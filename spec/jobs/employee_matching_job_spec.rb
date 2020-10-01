@@ -3,5 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe EmployeeMatchingJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+  
+  subject(:job) { described_class.perform_later }
+
+  it 'is in urgent queue' do
+    expect(EmployeeMatchingJob.new.queue_name).to eq('default')
+  end
+  
 end

@@ -38,7 +38,9 @@ class Employee < ApplicationRecord
   ##################### Validations #######################
 
   validates_presence_of :name, :department
-  validates_format_of :name, with: /^[a-zA-Z\s]*$/i, multiline: true
+  # Relax name validation for the Fakers sake.
+  # TODO: Reenable when no faking is needed
+  # validates_format_of :name, with: /^[a-zA-Z\s]*$/i, multiline: true
   validate :has_full_name
 
   ##################### Associations ######################
