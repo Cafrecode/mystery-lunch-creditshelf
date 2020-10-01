@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+
+<body>
+
+    <p>Dear <%= @employee.name %>, you have been matched for the Mystery Lunch! See the people/person below:</p>
+
+    <% @employees.each do |employee| %>
+    <span><%= employee.name %>, </span>
+    <% end %>
+
+    <p> You can connect to the platform on:
+        <a href="http://mystery-lunch-fno.herokuapp.com">http://mystery-lunch-fno.herokuapp.com</a>
+    </p>
+
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<% content_for :employees do %>
+active
+<% end %>
+
+<!-- Basic Tables start -->
+<div class="row" id="basic-table">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Employees</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <p class="card-text">Below is a list and details of Employees registered on
+                        the system</p>
+                    <!-- Table with outer spacing -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% @employees.each do |employee| %>
+                                <tr>
+                                    <td><%= employee.name %></td>
+                                    <td><%= employee.email %></td>
+                                    <td><%= employee.department.humanize.capitalize %></td>
+                                    <td><%= employee.status %></td>
+
+                                    <td><%= link_to "View" , employee %>
+                                        <%= link_to "Edit" , edit_employee_path(employee) %>
+                                        <%= link_to 'Delete', employee, method: :delete, data: { confirm: 'Are you sure?' } %>
+                                    </td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>
+                    <div class="digg_pagination">
+                        <!--   will_paginate @organizations, :container => false -->
+
+                    </div>
+                    </p>
+                    <div class="flex items-center justify-start mt-6">
+                        <%= link_to 'New Employee' , new_employee_path, class: "btn btn-outline-dark mr-1 mb-1" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Basic Tables end -->

@@ -1,0 +1,30 @@
+<%% content_for :<%= plural_table_name %> do %>
+active
+<%% end %>
+
+        <!-- information start -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7 col-12 ">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title mb-2">About
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+
+                            <% attributes.reject(&:password_digest?).each do |attribute| -%>
+                            <dl class="row">
+                                <dt class="col-sm-3 text-right"><%= attribute.human_name %>:</dt>
+                                <dd class="col-sm-9"> <%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
+                            </dl>
+                            <% end -%>
+                        </div>
+                        <div class="flex items-center justify-start mt-6">
+                            <%%= link_to 'Edit' , edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-default mr-4" %>
+                            <%%= link_to 'Back' , <%= index_helper %>_path, class: "btn btn-default" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

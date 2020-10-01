@@ -1,0 +1,55 @@
+<!--<h2>Change your password</h2>-->
+<section class="row flexbox-container">
+  <div class="col-xl-8 col-11 d-flex justify-content-center">
+    <div class="card bg-authentication rounded-0 mb-0">
+      <div class="row m-0">
+        <div class="col-lg-6 d-lg-block d-none text-center align-self-center px-1 py-0">
+          <img src="/app-assets/images/pages/login.png" alt="branding logo">
+        </div>
+        <div class="col-lg-6 col-12 p-0">
+          <div class="card rounded-0 mb-0 px-2">
+            <div class="card-header pb-1">
+              <div class="card-title">
+                <br>
+                <h4 class="mb-0">Change your password</h4>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="card-body pt-1">
+                <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
+                <%= f.hidden_field :reset_password_token %>
+
+                <fieldset class="form-label-group form-group position-relative has-icon-left">
+                  <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                  <% end %>
+                  <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+                  <div class="form-control-position">
+                    <i class="feather icon-user"></i>
+                  </div>
+                  <label for="user-name">New password</label>
+                </fieldset>
+
+                <fieldset class="form-label-group position-relative has-icon-left">
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+                  <div class="form-control-position">
+                    <i class="feather icon-lock"></i>
+                  </div>
+                  <label for="user-password">Confirm new password</label>
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary float-right btn-inline">Change Password</button>
+                <% end %>
+
+              </div>
+            </div>
+
+            <%= render "devise/shared/links" %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

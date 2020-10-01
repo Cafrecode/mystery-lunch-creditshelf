@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+
+<body>
+  <p>Dear <%= @employee.name %>,
+    <br>
+
+  <p>This email provides you with your temporary password. Use this password the next time you log on to the Mystery Lunch Platform.</p>
+
+  <p> After login, you can change your password.
+  </p>
+
+  <p> You can connect to the platform on:
+    <a href="http://mystery-lunch-fno.herokuapp.com"> http://mystery-lunch-fno.herokuapp.com</a>
+  </p>
+  <br>
+  Username/Email: <%= @employee.email %>
+  <br>
+  Temporary Password: <%= @employee.password %>
+  <br>
+</body>
+
+</html>

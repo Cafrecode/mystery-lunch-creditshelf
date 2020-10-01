@@ -1,0 +1,44 @@
+<div class="row">
+    <!-- account start -->
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title"># <%= index+1 %></div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    <% employee_lunches.each do | employee_lunch | %>
+                    <div class="col-12 col-sm-9 col-md-6 col-lg-5">
+                        <div class="users-view-image">
+                            <% if employee_lunch.employee.avatar.attached? %>
+                            <% begin %>
+                            <%= image_tag employee_lunch.employee.avatar.variant(resize: "60x60!"), class: "round" %>
+                            <% rescue ActiveStorage::InvariableError => e %>
+                            <% puts "Rescued: #{e.inspect}" %>
+                            <img class="round" src="/app-assets/images/ico/avatar.jpeg" alt="avatar" height="60"
+                                width="60"></span>
+                            <% end %>
+                            <% else %>
+                            <img class="round" src="/app-assets/images/ico/avatar.jpeg" alt="avatar" height="60"
+                                width="60"></span>
+                            <% end %>
+                        </div>
+                        <br>
+                        <table>
+                            <tr>
+                                <td class="font-weight-bold">Name</td>
+                                <td><%= employee_lunch.employee.name %></td>
+                            </tr>
+                            <tr>
+                                <td class="font-weight-bold">Department</td>
+                                <td><%= employee_lunch.employee.department.humanize %></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
