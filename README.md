@@ -31,7 +31,7 @@ $ sudo docker-compose up -d web jobs
 
 ```
 
-The live demo site is available [here](https://mystery.cafrecode.co.ke) with the following credentials to login:
+The live demo site is available [here](http://mystery-lunch-fno.herokuapp.com) with the following credentials to login:
 ```
 username/password: mystery@lunch.com/123456
 ```
