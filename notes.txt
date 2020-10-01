@@ -81,3 +81,10 @@ all in one department etc (if no criteria is met): display no lunches this month
     start: sudo docker-compose up -d
 
     # make sure the entrypoint.sh file is executable (has the executable bit set). chmod +x <your file>
+
+
+    TODO:
+    [ ] Improve test coverage
+    [ ] Use https://devcenter.heroku.com/articles/scheduler for heroku scheduling of matching job
+    [ ] Refactor matching algorithm for efficiency -- some checks are repeated unnecesarily
+    [ ] Sidekiq for queues
