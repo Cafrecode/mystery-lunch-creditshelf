@@ -36,10 +36,16 @@ RSpec.describe EmployeeLunch, type: :model do
 
     it { expect(subject).to_not validate_uniqueness_of(:employee_id).scoped_to(:lunch_id) }
     it { expect(subject).to_not validate_uniqueness_of(:employee_id).scoped_to(:date) }
+    it { expect(subject).to validate_presence_of(:lunch_id) }
+
   end
 
   describe 'Callbacks' do
     it { expect(subject).to callback(:notify_matched_employees).after(:commit) }
     it { expect(subject).to callback(:set_date).before(:validation) }
+  end
+
+  describe 'Associations' do
+    it { expect(subject).to belong_to(:lunch) }
   end
 end

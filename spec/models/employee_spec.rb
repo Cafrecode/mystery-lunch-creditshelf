@@ -35,6 +35,7 @@ RSpec.describe Employee, type: :model do
   end
 
   describe 'Validations' do
+
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
     end
@@ -51,10 +52,14 @@ RSpec.describe Employee, type: :model do
 
     it { expect(subject).to validate_presence_of(:department) }
     it { expect(subject).to_not allow_value('Fred').for(:name) }
+
   end
 
   describe 'Associations' do
+
     it { should have_many(:lunches) }
+    it { should have_many(:employee_lunches) }
+
   end
 
   describe 'Match' do
@@ -78,5 +83,6 @@ RSpec.describe Employee, type: :model do
   describe 'Callbacks' do
     it { expect(subject).to callback(:execute_matching).after(:commit) }
     it { expect(subject).to callback(:cleanup_current_lunches).before(:validation) }
+    it { expect(subject).to callback(:set_is_new).after(:create) }
   end
 end
