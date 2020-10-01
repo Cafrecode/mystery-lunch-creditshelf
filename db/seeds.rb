@@ -7,18 +7,24 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 
 employees = Employee.create([
-                              { name: 'Lizzy Dimples', email: 'o.frederickn@gmail.com', password: '123456', password_confirmation: '123456', department: 'marketing' },
-                              { name: 'Mary Karanja', email: 'frederick@cafrecode.co.ke', password: '123456', password_confirmation: '123456', department: 'sales' },
-                              { name: 'Frank Wilbert', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'operations' },
-                              { name: 'Maureen Caplan', email: 'frederickno@live.com', password: '123456', password_confirmation: '123456', department: 'data' },
-                              { name: 'Collins Mucheru', email: 'o.frederick.n@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales', status: 'deleted' },
-                              { name: 'Frederick Omala', email: 'frederick.nyash@gmail.com', password: '123456', password_confirmation: '123456', department: 'data' }
+                              { name: 'Mystery Lunch', email: 'mystery@lunch.com', password: '123456', password_confirmation: '123456', department: 'marketing' },
+                              { name: 'Frederick Om', email: 'o.frederickn@gmail.com', password: '123456', password_confirmation: '123456', department: 'sales' },
                             ])
 
-lunch = Lunch.create!(date: 1.day.ago)
+# Create 17 to make an odd 19
+17.times do
+  Employee.create(
+    name: Faker::Name.name, 
+    email: Faker::Internet.email, 
+    password: '123456', 
+    password_confirmation: '123456', 
+    department: Employee.departments.map {|k, v| k }.sample)
+end
 
-el2 = EmployeeLunch.create!(employee: Employee.first, lunch: lunch, date: 1.day.ago)
-
-el1 = EmployeeLunch.create!(employee: Employee.second, lunch: lunch, date: 1.day.ago)
+# Clear the lucnhes that get assigned to new employees when created
+['lunches', 'employee_lunches'].each do |table|
+  ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
+end

@@ -20,6 +20,7 @@ $ rspec
 $ rails s
 
 ```
+Refere to the *Misc* section for information on how to schedule the matching or running it immediately.
 
 ### Method 2: docker-compose
 
@@ -30,7 +31,11 @@ $ sudo docker-compose up -d web jobs
 
 ```
 
-The live demo site is available [here](https://mystery.cafrecode.co.ke)
+The live demo site is available [here](https://mystery.cafrecode.co.ke) with the following credentials to login:
+```
+username/password: mystery@lunch.com/123456
+```
+
 
 ### Misc
 
@@ -49,6 +54,8 @@ $ whenever --update-crontab
 
 ```
 The app uses the `whenever` gem to schedule the monthly recurring matching job.
+
+Another way to start the mathcing job is to either create or delete and employee.
 
 # Mystery Matcher
 

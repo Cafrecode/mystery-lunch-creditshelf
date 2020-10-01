@@ -19,6 +19,7 @@ active
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Email</th>
                                     <th>Department</th>
                                     <th>Status</th>
 
@@ -30,7 +31,8 @@ active
                                 <% @employees.each do |employee| %>
                                 <tr>
                                     <td><%= employee.name %></td>
-                                    <td><%= employee.department %></td>
+                                    <td><%= employee.email %></td>
+                                    <td><%= employee.department.humanize.capitalize %></td>
                                     <td><%= employee.status %></td>
 
                                     <td><%= link_to "View" , employee %>
