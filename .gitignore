@@ -26,7 +26,7 @@
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
-# /config/master.key temp allow, private meh, bad practice
+/config/master.key 
 
 /public/packs
 /public/packs-test
